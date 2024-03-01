@@ -75,10 +75,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             TextFormField(
+                              cursorColor: Theme.of(context).primaryColor,
                               controller: _emailController,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 2,
+                                  ),
+                                ),
                                 hintText: 'Enter Your Email',
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
@@ -103,8 +110,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             TextFormField(
+                              cursorColor: Theme.of(context).primaryColor,
                               controller: _passwordController,
                               decoration: InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 2,
+                                  ),
+                                ),
                                 hintText: 'Enter Your Password',
                                 hintStyle: const TextStyle(
                                   fontWeight: FontWeight.bold,
