@@ -17,6 +17,18 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromRGBO(237, 215, 191, 1),
         primaryColor: const Color.fromRGBO(35, 12, 2, 1),
         useMaterial3: true,
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Theme.of(context).primaryColor,
+            ), // Set the border color to your primary color
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Theme.of(context).primaryColor,
+            ), // Set the focused border color to your primary color
+          ),
+        ),
       ),
       home: const LandingScreen(),
     );
