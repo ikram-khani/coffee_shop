@@ -1,24 +1,44 @@
+import 'package:coffee_shop/view/screens/cart_screen.dart';
+import 'package:coffee_shop/view/screens/favorite_screen.dart';
+import 'package:coffee_shop/view/screens/profile_screen.dart';
 import 'package:coffee_shop/view/widgets/category_wise_products.dart';
+import 'package:coffee_shop/view/widgets/navigation_bar.dart';
 import 'package:coffee_shop/view/widgets/notification_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<Home> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<Home> {
   bool _isSearching = false;
   final FocusNode _searchFocusNode = FocusNode();
+
+  late PageController _pageController = PageController();
+
+  final List<Widget> _pages = [
+    const CategoryWiseProducts(),
+    const CartScreen(),
+    const FavoriteScreen(),
+    const ProfileScreen(),
+  ];
 
   @override
   void dispose() {
     _searchFocusNode.dispose();
+    _pageController.dispose();
 
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: 0);
   }
 
   @override
@@ -40,17 +60,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
               _searchFocusNode.requestFocus();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.search,
+              color: Theme.of(context).primaryColor,
             ),
           ),
         ),
         title: _isSearching
             ? _buildSearchField(_searchFocusNode)
-            : const Text(
+            : Text(
                 'Good day, Ikram',
                 style: TextStyle(
                   fontSize: 17,
+                  fontWeight: FontWeight.w400,
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
         actions: [
@@ -62,14 +85,31 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
               onPressed: () {},
-              icon: const Icon(Icons.menu),
+              icon: Icon(
+                Icons.menu,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           )
         ],
       ),
       body: GestureDetector(
         onTap: () => _searchFocusNode.unfocus(),
-        child: const CategoryWiseProducts(),
+        child: PageView(
+          scrollDirection: Axis.horizontal,
+          physics: const NeverScrollableScrollPhysics(),
+          controller: _pageController,
+          children: _pages,
+        ),
+      ),
+      bottomNavigationBar: CustomNavigationBar(
+        onItemSelection: (index) {
+          _pageController.animateToPage(
+            index,
+            duration: const Duration(microseconds: 300),
+            curve: Curves.ease,
+          );
+        },
       ),
     );
   }

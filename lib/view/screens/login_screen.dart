@@ -1,4 +1,4 @@
-import 'package:coffee_shop/view/screens/home_Screen.dart';
+import 'package:coffee_shop/view/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => const HomeScreen(),
+                                builder: (context) => const Home(),
                               ),
                             );
                           },

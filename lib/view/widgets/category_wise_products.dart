@@ -175,10 +175,8 @@ class _CategoryWiseProductsState extends State<CategoryWiseProducts> {
     double offset =
         (index * categoryWidth) - (screenWidth / 2) + (categoryWidth / 2);
 
-    _scrollController.animateTo(
+    _scrollController.jumpTo(
       offset,
-      duration: const Duration(microseconds: 300),
-      curve: Curves.easeIn,
     );
   }
 }
