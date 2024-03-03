@@ -1,3 +1,4 @@
+import 'package:coffee_shop/view/widgets/products_list_view.dart';
 import 'package:flutter/material.dart';
 
 class CategoryWiseProducts extends StatefulWidget {
@@ -12,19 +13,21 @@ class _CategoryWiseProductsState extends State<CategoryWiseProducts> {
   int _currentIndex = 0;
   ScrollController _scrollController = ScrollController();
 
-  List<String> coffeeCategories = [
+  static List<String> coffeeCategories = [
     'Espresso',
     'Latte',
+    'Black Coffee',
+    'Winter Special',
     'Cappuccino',
-    'Americano',
-    'Macchiato',
     'Mocha',
-    'Flat White',
-    'Affogato',
-    'Cold Brew',
-    'Iced Coffee',
-    'Frappuccino',
-    'Decaf',
+  ];
+  final List<Widget> _homeProductsCategoryPages = [
+    ProductsListView(category: coffeeCategories[0]),
+    ProductsListView(category: coffeeCategories[1]),
+    ProductsListView(category: coffeeCategories[2]),
+    ProductsListView(category: coffeeCategories[3]),
+    ProductsListView(category: coffeeCategories[4]),
+    ProductsListView(category: coffeeCategories[5]),
   ];
 
   @override
@@ -119,47 +122,14 @@ class _CategoryWiseProductsState extends State<CategoryWiseProducts> {
         ),
         Expanded(
           child: PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                _currentIndex = index;
-                _scrollToCategory(index);
-              });
-            },
-            children: [
-              // Pages for each category
-              Container(
-                color: Colors.blue,
-                child: Center(
-                  child: Text('Category 0 Content'),
-                ),
-              ),
-              Container(
-                color: Colors.green,
-                child: Center(
-                  child: Text('Category 1 Content'),
-                ),
-              ),
-              Container(
-                color: Colors.red,
-                child: Center(
-                  child: Text('Category 2 Content'),
-                ),
-              ),
-              Container(
-                color: Colors.yellow,
-                child: Center(
-                  child: Text('Category 3 Content'),
-                ),
-              ),
-              Container(
-                color: Colors.orange,
-                child: Center(
-                  child: Text('Category 4 Content'),
-                ),
-              ),
-            ],
-          ),
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentIndex = index;
+                  _scrollToCategory(index);
+                });
+              },
+              children: _homeProductsCategoryPages),
         ),
       ],
     );
