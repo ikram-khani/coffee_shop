@@ -1,3 +1,4 @@
+import 'package:coffee_shop/view/widgets/category_wise_products.dart';
 import 'package:coffee_shop/view/widgets/notification_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,12 +17,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _searchFocusNode.dispose();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
@@ -65,10 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: GestureDetector(
-          onTap: () => _searchFocusNode.unfocus(),
-          child: Container(
-            color: Colors.black,
-          )),
+        onTap: () => _searchFocusNode.unfocus(),
+        child: const CategoryWiseProducts(),
+      ),
     );
   }
 }
