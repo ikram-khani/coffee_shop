@@ -16,6 +16,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: const Color.fromRGBO(237, 215, 191, 1),
         primaryColor: const Color.fromRGBO(35, 12, 2, 1),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromRGBO(237, 215, 191, 1),
+        ),
         useMaterial3: true,
       ),
       home: const LandingScreen(),

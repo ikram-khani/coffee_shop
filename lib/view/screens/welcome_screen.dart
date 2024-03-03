@@ -22,7 +22,8 @@ class WelcomeScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 30),
             child: const Text(
               'Welcome \nBack!',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 35, height: 1),
             ),
           ),
           const SizedBox(
