@@ -51,6 +51,8 @@ class _CategoryWiseProductsState extends State<CategoryWiseProducts> {
         Padding(
           padding: const EdgeInsets.only(
             left: 22,
+            top: 10,
+            bottom: 15,
           ),
           child: Align(
             alignment: Alignment.topLeft,

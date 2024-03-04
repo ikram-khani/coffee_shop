@@ -60,9 +60,11 @@ class _HomeScreenState extends State<Home> {
 
               _searchFocusNode.requestFocus();
             },
-            icon: Icon(
-              Icons.search,
+            icon: Image(
+              height: 20,
+              width: 20,
               color: Theme.of(context).primaryColor,
+              image: const AssetImage('assets/icons/search_icon.png'),
             ),
           ),
         ),
