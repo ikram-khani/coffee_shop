@@ -1,6 +1,7 @@
 import 'package:coffee_shop/view/screens/cart_screen.dart';
 import 'package:coffee_shop/view/screens/favorite_screen.dart';
 import 'package:coffee_shop/view/screens/profile_screen.dart';
+import 'package:coffee_shop/view/screens/search_screen.dart';
 import 'package:coffee_shop/view/widgets/category_wise_products.dart';
 import 'package:coffee_shop/view/widgets/navigation_bar.dart';
 import 'package:coffee_shop/view/widgets/notification_icon.dart';
@@ -15,7 +16,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<Home> {
-  bool _isSearching = false;
   final FocusNode _searchFocusNode = FocusNode();
 
   late PageController _pageController = PageController();
@@ -52,13 +52,11 @@ class _HomeScreenState extends State<Home> {
           padding: const EdgeInsets.only(left: 10.0),
           child: IconButton(
             onPressed: () {
-              if (!_isSearching) {
-                setState(() {
-                  _isSearching = true;
-                });
-              }
-
-              _searchFocusNode.requestFocus();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const SearchScreen(),
+                ),
+              );
             },
             icon: Image(
               height: 20,
@@ -68,16 +66,14 @@ class _HomeScreenState extends State<Home> {
             ),
           ),
         ),
-        title: _isSearching
-            ? _buildSearchField(_searchFocusNode)
-            : Text(
-                'Good day, Ikram',
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w400,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
+        title: Text(
+          'Good day, Ikram',
+          style: TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
         actions: [
           TextButton(
             onPressed: () {},
@@ -115,20 +111,4 @@ class _HomeScreenState extends State<Home> {
       ),
     );
   }
-}
-
-Widget _buildSearchField(FocusNode focusNode) {
-  return TextField(
-    textInputAction: TextInputAction.search,
-    focusNode: focusNode,
-    decoration: const InputDecoration(
-      hintText: 'Search...',
-      hintStyle: TextStyle(color: Colors.grey),
-      border: InputBorder.none,
-    ),
-    style: const TextStyle(color: Colors.black),
-    onChanged: (value) {
-      // Handle search functionality
-    },
-  );
 }
