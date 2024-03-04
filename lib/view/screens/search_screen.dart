@@ -28,7 +28,7 @@ class _SearchScreenState extends State<SearchScreen> {
           color: Theme.of(context).primaryColor,
         ),
         toolbarHeight: 130,
-        title: _buildSearchField(_focusNode, context),
+        title: _buildSearchField(_focusNode),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -39,7 +39,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget _buildSearchField(FocusNode focusNode, BuildContext context) {
+  Widget _buildSearchField(FocusNode focusNode) {
     double deviceWidth = MediaQuery.of(context).size.width;
 
     return Container(
