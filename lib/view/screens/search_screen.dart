@@ -13,7 +13,15 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _textEditingController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  final List<Product> _productsList = productsList;
+  List<Product> _allProducts = [];
+  List<Product> _filteredProducts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _allProducts = productsList;
+    _filteredProducts = _allProducts;
+  }
 
   @override
   void dispose() {
@@ -34,39 +42,42 @@ class _SearchScreenState extends State<SearchScreen> {
         toolbarHeight: 130,
         title: _buildSearchField(_focusNode),
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
+      body: GestureDetector(
+        onTap: () => _focusNode.unfocus(),
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                '3 Search results',
-                style: TextStyle(color: Theme.of(context).primaryColor),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: _productsList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child:
-                          ProductListCard(index: index, products: productsList),
-                    );
-                  },
+          child: Padding(
+            padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  '${_filteredProducts.length} Search results',
+                  style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 10,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _filteredProducts.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: ProductListCard(
+                            index: index, products: _filteredProducts),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -92,6 +103,7 @@ class _SearchScreenState extends State<SearchScreen> {
             suffixIcon: GestureDetector(
               onTap: () {
                 _textEditingController.clear();
+                _filterProducts('');
               },
               child: const Icon(
                 Icons.clear,
@@ -106,9 +118,18 @@ class _SearchScreenState extends State<SearchScreen> {
             border: InputBorder.none),
         style: const TextStyle(color: Colors.black),
         onChanged: (value) {
-          // Handle search functionality
+          _filterProducts(value);
         },
       ),
     );
+  }
+
+  void _filterProducts(String query) {
+    setState(() {
+      _filteredProducts = _allProducts.where((product) {
+        final productName = product.name.toLowerCase();
+        return productName.contains(query.toLowerCase());
+      }).toList();
+    });
   }
 }
