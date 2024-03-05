@@ -1,3 +1,6 @@
+import 'package:coffee_shop/data/products_data.dart';
+import 'package:coffee_shop/models/product_model.dart';
+import 'package:coffee_shop/view/widgets/product_list_card.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -10,6 +13,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _textEditingController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+  final List<Product> _productsList = productsList;
 
   @override
   void dispose() {
@@ -32,9 +36,39 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: Container(
         decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                '3 Search results',
+                style: TextStyle(color: Theme.of(context).primaryColor),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: _productsList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child:
+                          ProductListCard(index: index, products: productsList),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

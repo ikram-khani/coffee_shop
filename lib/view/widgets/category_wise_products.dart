@@ -1,4 +1,4 @@
-import 'package:coffee_shop/view/widgets/products_list_view.dart';
+import 'package:coffee_shop/view/widgets/home_products_listview.dart';
 import 'package:flutter/material.dart';
 
 class CategoryWiseProducts extends StatefulWidget {
@@ -22,12 +22,12 @@ class _CategoryWiseProductsState extends State<CategoryWiseProducts> {
     'Mocha',
   ];
   final List<Widget> _homeProductsCategoryPages = [
-    ProductsListView(category: coffeeCategories[0]),
-    ProductsListView(category: coffeeCategories[1]),
-    ProductsListView(category: coffeeCategories[2]),
-    ProductsListView(category: coffeeCategories[3]),
-    ProductsListView(category: coffeeCategories[4]),
-    ProductsListView(category: coffeeCategories[5]),
+    HomeProductsListView(category: coffeeCategories[0]),
+    HomeProductsListView(category: coffeeCategories[1]),
+    HomeProductsListView(category: coffeeCategories[2]),
+    HomeProductsListView(category: coffeeCategories[3]),
+    HomeProductsListView(category: coffeeCategories[4]),
+    HomeProductsListView(category: coffeeCategories[5]),
   ];
 
   @override
