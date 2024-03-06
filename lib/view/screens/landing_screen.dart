@@ -16,7 +16,7 @@ class LandingScreen extends StatelessWidget {
           const Image(
             fit: BoxFit.cover,
             width: double.infinity,
-            image: AssetImage('assets/images/coffe_background.png'),
+            image: AssetImage('assets/images/coffee_background.png'),
           ),
           const SizedBox(
             height: 40,

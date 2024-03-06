@@ -37,11 +37,11 @@ class _LoginScreenState extends State<LoginScreen> {
               const Image(
                 fit: BoxFit.cover,
                 width: double.infinity,
-                image: AssetImage('assets/images/coffe_background.png'),
+                image: AssetImage('assets/images/coffee_background.png'),
               ),
               Positioned(
                 left: 0,
-                bottom: 0,
+                bottom: -5,
                 child: Container(
                   padding: const EdgeInsets.only(
                     left: 30,
@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
           const SizedBox(
-            height: 10,
+            height: 30,
           ),
           Expanded(
             child: SingleChildScrollView(

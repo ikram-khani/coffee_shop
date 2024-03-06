@@ -16,7 +16,7 @@ class WelcomeScreen extends StatelessWidget {
           const Image(
             fit: BoxFit.cover,
             width: double.infinity,
-            image: AssetImage('assets/images/coffe_background.png'),
+            image: AssetImage('assets/images/coffee_background.png'),
           ),
           Container(
             padding: const EdgeInsets.only(left: 30),
