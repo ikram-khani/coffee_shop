@@ -1,3 +1,4 @@
+import 'package:coffee_shop/view/screens/profile_screen.dart';
 import 'package:coffee_shop/view/widgets/custom_list_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -6,13 +7,20 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double deviceHeight = MediaQuery.of(context).size.height;
+    // To get the system padding using MediaQuery
+    var systemPadding = MediaQuery.of(context).padding;
+    // To get the app bar height using the AppBar widget
+    var appBarHeight = AppBar().preferredSize.height;
+
+    // And to calculate the combined height of AppBar and system UI
+    double appBarWithSystemUIHeight = appBarHeight + systemPadding.top;
+
     return Align(
       alignment: Alignment.topRight,
       child: Container(
-        margin: EdgeInsets.only(top: deviceHeight / 10.5),
-        width: 150,
-        height: 170,
+        margin: EdgeInsets.only(top: appBarWithSystemUIHeight - 10),
+        width: 160,
+        height: 180,
         child: Drawer(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -23,28 +31,39 @@ class AppDrawer extends StatelessWidget {
           backgroundColor: const Color.fromRGBO(255, 245, 233, 1),
           child: ListView(
             padding: EdgeInsets.zero,
-            children: const [
-              SizedBox(
+            children: [
+              const SizedBox(
                 height: 10,
               ),
               CustomListTile(
-                leading: Icon(Icons.person),
+                leading: const Icon(Icons.person),
                 title: 'Profile',
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const ProfileScreen(),
+                    ),
+                  );
+                },
               ),
-              Divider(),
+              const Divider(),
               CustomListTile(
-                leading: Icon(Icons.settings_outlined),
+                leading: const Icon(Icons.settings_outlined),
                 title: 'Settings',
+                onTap: () {},
               ),
-              Divider(),
+              const Divider(),
               CustomListTile(
-                leading: Icon(Icons.help_outline),
+                leading: const Icon(Icons.help_outline),
                 title: 'Help',
+                onTap: () {},
               ),
-              Divider(),
+              const Divider(),
               CustomListTile(
-                leading: Icon(Icons.logout_outlined),
+                leading: const Icon(Icons.logout_outlined),
                 title: 'Logout',
+                onTap: () {},
               ),
             ],
           ),
