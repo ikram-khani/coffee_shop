@@ -1,3 +1,4 @@
+import 'package:coffee_shop/view/screens/home.dart';
 import 'package:coffee_shop/view/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Coffee Shop',
       theme: ThemeData(
         scaffoldBackgroundColor: const Color.fromRGBO(237, 215, 191, 1),
         primaryColor: const Color.fromRGBO(35, 12, 2, 1),
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const LandingScreen(),
+      home: const Home(),
     );
   }
 }

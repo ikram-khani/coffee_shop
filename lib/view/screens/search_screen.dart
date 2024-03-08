@@ -113,7 +113,7 @@ class _SearchScreenState extends State<SearchScreen> {
               horizontal: 18,
               vertical: 15,
             ),
-            hintText: 'Search...',
+            hintText: 'Search your coffee',
             hintStyle: const TextStyle(color: Colors.grey),
             border: InputBorder.none),
         style: const TextStyle(color: Colors.black),

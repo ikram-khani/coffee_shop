@@ -57,7 +57,7 @@ class _CategoryWiseProductsState extends State<CategoryWiseProducts> {
           child: Align(
             alignment: Alignment.topLeft,
             child: Text(
-              'What would you like\nto drink today?',
+              'What would you like to drink ?',
               textAlign: TextAlign.start,
               style: TextStyle(
                 height: 1,
