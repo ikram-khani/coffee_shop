@@ -13,11 +13,8 @@ class PopupMenuButtonWidget extends StatelessWidget {
       padding: EdgeInsets.zero,
       position: PopupMenuPosition.under,
       color: const Color.fromRGBO(255, 245, 233, 1),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(25),
-          bottomLeft: Radius.circular(25),
-        ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
       ),
       itemBuilder: (context) {
         return [

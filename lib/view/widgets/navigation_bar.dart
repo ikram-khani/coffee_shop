@@ -1,3 +1,4 @@
+import 'package:coffee_shop/view/widgets/cart_badge.dart';
 import 'package:flutter/material.dart';
 
 class CustomNavigationBar extends StatefulWidget {
@@ -32,8 +33,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             label: 'Home',
           ),
           NavigationDestination(
-            icon: Icon(Icons.shopping_cart_outlined),
-            selectedIcon: Icon(Icons.shopping_cart),
+            icon: CartBadge(icon: Icons.shopping_cart_outlined),
+            selectedIcon: CartBadge(icon: Icons.shopping_cart),
             label: 'Cart',
           ),
           NavigationDestination(
