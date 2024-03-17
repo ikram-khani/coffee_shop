@@ -34,9 +34,21 @@ class ProductListCard extends StatelessWidget {
                   Text(
                     products[index].name.toUpperCase(),
                     style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15),
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    '\$${products[index].price.toString()}',
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor.withOpacity(0.5),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
                 ],
               ),
