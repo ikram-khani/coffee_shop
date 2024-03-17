@@ -2,23 +2,26 @@ import 'package:flutter/material.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   final void Function(int) onItemSelection;
-  const CustomNavigationBar({required this.onItemSelection, super.key});
+  final int currentPageIndex;
+  const CustomNavigationBar(
+      {required this.currentPageIndex,
+      required this.onItemSelection,
+      super.key});
 
   @override
   State<CustomNavigationBar> createState() => _CustomNavigationBarState();
 }
 
 class _CustomNavigationBarState extends State<CustomNavigationBar> {
-  int _currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
+    int currentIndex = widget.currentPageIndex;
     return NavigationBar(
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        selectedIndex: _currentPageIndex,
+        selectedIndex: currentIndex,
         onDestinationSelected: (index) {
           setState(() {
-            _currentPageIndex = index;
+            currentIndex = index;
             widget.onItemSelection(index);
           });
         },

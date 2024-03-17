@@ -2,10 +2,10 @@ import 'package:coffee_shop/view/screens/cart_screen.dart';
 import 'package:coffee_shop/view/screens/favorite_screen.dart';
 import 'package:coffee_shop/view/screens/profile_screen.dart';
 import 'package:coffee_shop/view/screens/search_screen.dart';
-import 'package:coffee_shop/view/widgets/app_drawer.dart';
 import 'package:coffee_shop/view/widgets/category_wise_products.dart';
 import 'package:coffee_shop/view/widgets/navigation_bar.dart';
 import 'package:coffee_shop/view/widgets/notification_icon.dart';
+import 'package:coffee_shop/view/widgets/popup_menu_botton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -20,7 +20,8 @@ class _HomeScreenState extends State<Home> {
   final FocusNode _searchFocusNode = FocusNode();
 
   late PageController _pageController = PageController();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  int _currentPageIndex = 0;
 
   final List<Widget> _pages = [
     const CategoryWiseProducts(),
@@ -48,9 +49,6 @@ class _HomeScreenState extends State<Home> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
     return Scaffold(
-      endDrawerEnableOpenDragGesture: false,
-      key: _scaffoldKey,
-      endDrawer: const AppDrawer(),
       appBar: AppBar(
         titleSpacing: 0,
         leading: Padding(
@@ -84,17 +82,9 @@ class _HomeScreenState extends State<Home> {
             onPressed: () {},
             child: const NotificationIcon(),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: IconButton(
-              onPressed: () {
-                _scaffoldKey.currentState?.openEndDrawer();
-              },
-              icon: Icon(
-                Icons.menu,
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
+          const Padding(
+            padding: EdgeInsets.only(right: 10.0),
+            child: PopupMenuButtonWidget(),
           )
         ],
       ),
@@ -102,12 +92,17 @@ class _HomeScreenState extends State<Home> {
         onTap: () => _searchFocusNode.unfocus(),
         child: PageView(
           scrollDirection: Axis.horizontal,
-          physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           children: _pages,
+          onPageChanged: (index) {
+            setState(() {
+              _currentPageIndex = index;
+            });
+          },
         ),
       ),
       bottomNavigationBar: CustomNavigationBar(
+        currentPageIndex: _currentPageIndex,
         onItemSelection: (index) {
           _pageController.animateToPage(
             index,
