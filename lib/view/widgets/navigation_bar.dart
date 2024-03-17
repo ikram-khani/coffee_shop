@@ -1,4 +1,3 @@
-import 'package:coffee_shop/view/widgets/cart_badge.dart';
 import 'package:flutter/material.dart';
 
 class CustomNavigationBar extends StatefulWidget {
@@ -26,23 +25,28 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             widget.onItemSelection(index);
           });
         },
-        destinations: const [
-          NavigationDestination(
+        destinations: [
+          const NavigationDestination(
             icon: Icon(Icons.home_outlined),
             selectedIcon: Icon(Icons.home),
             label: 'Home',
           ),
           NavigationDestination(
-            icon: CartBadge(icon: Icons.shopping_cart_outlined),
-            selectedIcon: CartBadge(icon: Icons.shopping_cart),
+            icon: Badge(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              backgroundColor: Theme.of(context).primaryColor,
+              label: const Text('1'),
+              child: const Icon(Icons.shopping_cart_outlined),
+            ),
+            selectedIcon: const Icon(Icons.shopping_cart),
             label: 'Cart',
           ),
-          NavigationDestination(
+          const NavigationDestination(
             icon: Icon(Icons.favorite_outline),
             selectedIcon: Icon(Icons.favorite),
             label: 'Favorite',
           ),
-          NavigationDestination(
+          const NavigationDestination(
             icon: Icon(Icons.person_2_outlined),
             selectedIcon: Icon(Icons.person_2),
             label: 'Profile',
