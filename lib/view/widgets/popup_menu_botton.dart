@@ -9,6 +9,8 @@ class PopupMenuButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
+      padding: EdgeInsets.zero,
+      position: PopupMenuPosition.under,
       color: const Color.fromRGBO(255, 245, 233, 1),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
