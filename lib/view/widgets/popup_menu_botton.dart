@@ -24,7 +24,6 @@ class PopupMenuButtonWidget extends StatelessWidget {
             leading: const Icon(Icons.person),
             title: 'Profile',
             onTaping: () {
-              Navigator.pop(context);
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const ProfileScreen(),
