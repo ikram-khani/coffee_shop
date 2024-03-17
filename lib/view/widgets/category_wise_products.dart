@@ -50,7 +50,7 @@ class _CategoryWiseProductsState extends State<CategoryWiseProducts> {
       children: [
         Padding(
           padding: const EdgeInsets.only(
-            left: 22,
+            left: 18,
             top: 10,
             bottom: 15,
           ),
@@ -77,7 +77,7 @@ class _CategoryWiseProductsState extends State<CategoryWiseProducts> {
             itemBuilder: (context, index) {
               return Padding(
                 padding: EdgeInsets.only(
-                  left: _currentIndex == index ? 22 : 0,
+                  left: _currentIndex == index ? 18 : 0,
                   right: _currentIndex == index ? 20 : 0,
                   bottom: 20,
                   top: 15,

@@ -50,10 +50,22 @@ class _HomeScreenState extends State<Home> {
         overlays: SystemUiOverlay.values);
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: 0,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 10.0),
-          child: IconButton(
+        titleSpacing: 20,
+        title: Text(
+          'IK\'s Coffee Craze',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const NotificationIcon(),
+            color: Theme.of(context).primaryColor,
+          ),
+          IconButton(
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -61,31 +73,10 @@ class _HomeScreenState extends State<Home> {
                 ),
               );
             },
-            icon: Image(
-              height: 20,
-              width: 20,
-              color: Theme.of(context).primaryColor,
-              image: const AssetImage('assets/icons/search_icon.png'),
-            ),
-          ),
-        ),
-        title: Text(
-          'Good day, Ikram',
-          style: TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w400,
+            icon: const Icon(Icons.search_outlined),
             color: Theme.of(context).primaryColor,
           ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {},
-            child: const NotificationIcon(),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(right: 10.0),
-            child: PopupMenuButtonWidget(),
-          )
+          const PopupMenuButtonWidget()
         ],
       ),
       body: GestureDetector(

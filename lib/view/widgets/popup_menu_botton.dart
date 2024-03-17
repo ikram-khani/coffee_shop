@@ -9,6 +9,7 @@ class PopupMenuButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
+      iconColor: Theme.of(context).primaryColor,
       padding: EdgeInsets.zero,
       position: PopupMenuPosition.under,
       color: const Color.fromRGBO(255, 245, 233, 1),
