@@ -1,4 +1,4 @@
-import '../../view/widgets/custom_list_tile.dart';
+import 'custom_menu_item.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/profile_screen.dart';
@@ -20,72 +20,56 @@ class PopupMenuButtonWidget extends StatelessWidget {
       ),
       itemBuilder: (context) {
         return [
-          PopupMenuItem(
-            height: 40,
-            padding: EdgeInsets.zero,
-            child: Column(
-              children: [
-                CustomListTile(
-                  leading: const Icon(Icons.person),
-                  title: 'Profile',
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const ProfileScreen(),
-                      ),
-                    );
-                  },
+          CustomMenuItem(
+            leading: const Icon(Icons.person),
+            title: 'Profile',
+            onTaping: () {
+              Navigator.pop(context);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(),
                 ),
-                const SizedBox(
+              );
+            },
+            divider: const Column(
+              children: [
+                SizedBox(
                   height: 5,
                 ),
-                const Divider(height: 1.0, color: Colors.grey),
+                Divider(height: 1.0, color: Colors.grey),
               ],
             ),
           ),
-          PopupMenuItem(
-            height: 40,
-            padding: EdgeInsets.zero,
-            child: Column(
+          CustomMenuItem(
+            leading: const Icon(Icons.settings_outlined),
+            title: 'Settings',
+            onTaping: () {},
+            divider: const Column(
               children: [
-                CustomListTile(
-                  leading: const Icon(Icons.settings_outlined),
-                  title: 'Settings',
-                  onTap: () {},
-                ),
-                const SizedBox(
+                SizedBox(
                   height: 5,
                 ),
-                const Divider(height: 1.0, color: Colors.grey),
+                Divider(height: 1.0, color: Colors.grey),
               ],
             ),
           ),
-          PopupMenuItem(
-            height: 40,
-            padding: EdgeInsets.zero,
-            child: Column(
+          CustomMenuItem(
+            leading: const Icon(Icons.help_outline),
+            title: 'Help',
+            onTaping: () {},
+            divider: const Column(
               children: [
-                CustomListTile(
-                  leading: const Icon(Icons.help_outline),
-                  title: 'Help',
-                  onTap: () {},
-                ),
-                const SizedBox(
+                SizedBox(
                   height: 5,
                 ),
-                const Divider(height: 1.0, color: Colors.grey),
+                Divider(height: 1.0, color: Colors.grey),
               ],
             ),
           ),
-          PopupMenuItem(
-            height: 40,
-            padding: EdgeInsets.zero,
-            child: CustomListTile(
-              leading: const Icon(Icons.logout_outlined),
-              title: 'Logout',
-              onTap: () {},
-            ),
+          CustomMenuItem(
+            leading: const Icon(Icons.logout_outlined),
+            title: 'Logout',
+            onTaping: () {},
           ),
         ];
       },
