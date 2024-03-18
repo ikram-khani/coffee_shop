@@ -48,6 +48,7 @@ class _HomeScreenState extends State<Home> {
     return Scaffold(
       appBar: AppBarWidget(
         context: context,
+        isThereAutomaticallyImplyLeading: false,
       ),
       body: PageView(
         scrollDirection: Axis.horizontal,

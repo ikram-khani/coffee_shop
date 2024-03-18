@@ -6,10 +6,14 @@ import '../screens/search_screen.dart';
 
 class AppBarWidget extends PreferredSize {
   final BuildContext context;
-  AppBarWidget({super.key, required this.context})
+  final bool isThereAutomaticallyImplyLeading;
+  AppBarWidget(
+      {required this.isThereAutomaticallyImplyLeading,
+      super.key,
+      required this.context})
       : super(
           child: AppBar(
-            titleSpacing: 20,
+            titleSpacing: isThereAutomaticallyImplyLeading ? 0 : 20,
             title: Text(
               'IK\'s Coffee Craze',
               style: TextStyle(
