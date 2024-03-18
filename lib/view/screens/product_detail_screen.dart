@@ -17,6 +17,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     Product product =
         productsList.firstWhere((element) => element.id == widget.productId);
+
     return Scaffold(
       appBar: AppBarWidget(
         context: context,
@@ -41,6 +42,104 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.elliptical(15, 10),
                 topRight: Radius.elliptical(15, 10),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 18,
+                top: 15,
+                bottom: 25,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          product.category,
+                          style: TextStyle(
+                            letterSpacing: 1.5,
+                            fontSize: 23,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.favorite,
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.share_outlined,
+                              color: Color.fromRGBO(203, 159, 130, 1),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Text(
+                    product.name.toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromRGBO(203, 159, 130, 1),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    product.description,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromRGBO(203, 159, 130, 1),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: Color.fromRGBO(242, 153, 74, 1),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        product.rating.toString(),
+                        style: const TextStyle(
+                          color: Color.fromRGBO(242, 153, 74, 1),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        '(${product.reviews})',
+                        style: TextStyle(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
           ),
