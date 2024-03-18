@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coffee_shop/view/screens/product_detail_screen.dart';
+import 'package:coffee_shop/view/widgets/cached_network_mage.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/product_model.dart';
@@ -19,7 +19,9 @@ class ProductListCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => ProductDetailScreen(),
+            builder: (context) => ProductDetailScreen(
+              productId: products[index].id,
+            ),
           ),
         );
       },
@@ -70,26 +72,9 @@ class ProductListCard extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: CachedNetworkImage(
-                      fadeInDuration: const Duration(milliseconds: 500),
-                      placeholderFadeInDuration:
-                          const Duration(milliseconds: 300),
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => AnimatedContainer(
-                            duration: const Duration(milliseconds: 500),
-                            color: Colors.grey[300],
-                            child: LinearProgressIndicator(
-                              backgroundColor: Colors.grey[300],
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  Colors.grey[200]!),
-                            ),
-                          ),
-                      imageUrl: products[index].pictureUrl,
-                      errorWidget: (context, url, error) {
-                        return const Center(
-                          child: Icon(Icons.error),
-                        );
-                      }),
+                  child: CachedNetworkImageWidget(
+                    imageUrl: products[index].pictureUrl,
+                  ),
                 ),
               ),
             ],

@@ -48,8 +48,8 @@ class _SearchScreenState extends State<SearchScreen> {
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
+              topLeft: Radius.elliptical(15, 10),
+              topRight: Radius.elliptical(15, 10),
             ),
           ),
           child: Padding(
