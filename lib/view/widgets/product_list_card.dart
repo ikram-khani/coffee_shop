@@ -66,7 +66,7 @@ class ProductListCard extends StatelessWidget {
               ),
               Container(
                 height: 80,
-                width: 65,
+                width: MediaQuery.of(context).size.width / 5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                 ),
