@@ -14,10 +14,28 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  int _count = 1;
+
+  void _increment() {
+    setState(() {
+      _count++;
+    });
+  }
+
+  void _decrement() {
+    if (_count > 1) {
+      setState(() {
+        _count--;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Product product =
         productsList.firstWhere((element) => element.id == widget.productId);
+
+    final deviceSize = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBarWidget(
@@ -153,6 +171,88 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         onSelected: (size) {
                           print('selected size: $size');
                         }),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    '\$${product.price}',
+                    style: TextStyle(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      fontSize: 19,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        width: deviceSize.width / 3,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(
+                            color: Colors.white,
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            IconButton(
+                              onPressed: _decrement,
+                              icon: Icon(
+                                Icons.remove,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                size: 18,
+                              ),
+                            ),
+                            Text(
+                              _count.toString(),
+                              style: TextStyle(
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: _increment,
+                              icon: Icon(
+                                Icons.add,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                size: 18,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                            Theme.of(context).scaffoldBackgroundColor,
+                          ),
+                          foregroundColor: MaterialStatePropertyAll(
+                            Theme.of(context).primaryColor,
+                          ),
+                          padding: MaterialStatePropertyAll(
+                            EdgeInsets.symmetric(
+                              horizontal: deviceSize.width / 8,
+                            ),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                          'ADD TO CART',
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      )
+                    ],
                   )
                 ],
               ),
