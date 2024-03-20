@@ -2,6 +2,7 @@ import 'package:coffee_shop/data/products_data.dart';
 import 'package:coffee_shop/models/product_model.dart';
 import 'package:coffee_shop/view/widgets/app_bar_widget.dart';
 import 'package:coffee_shop/view/widgets/cached_network_mage.dart';
+import 'package:coffee_shop/view/widgets/size_toggle_buttons.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -138,6 +139,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  const Text(
+                    'Size',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  Center(
+                    child: SizeToggleButtons(
+                        sizes: const [350, 400, 450],
+                        onSelected: (size) {
+                          print('selected size: $size');
+                        }),
                   )
                 ],
               ),
