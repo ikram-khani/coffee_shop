@@ -17,6 +17,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   Widget build(BuildContext context) {
     int currentIndex = widget.currentPageIndex;
     return NavigationBar(
+        height: 70,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         selectedIndex: currentIndex,
         onDestinationSelected: (index) {
@@ -27,7 +28,10 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
         },
         destinations: [
           const NavigationDestination(
-            icon: Icon(Icons.home_outlined),
+            icon: Icon(
+              Icons.home_outlined,
+              size: 25,
+            ),
             selectedIcon: Icon(Icons.home),
             label: 'Home',
           ),

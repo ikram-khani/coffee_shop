@@ -1,28 +1,26 @@
 import 'package:coffee_shop/view/screens/cart_screen.dart';
 import 'package:coffee_shop/view/screens/favorite_screen.dart';
 import 'package:coffee_shop/view/screens/profile_screen.dart';
-
-import 'package:coffee_shop/view/widgets/app_bar_widget.dart';
-import 'package:coffee_shop/view/widgets/category_wise_products.dart';
+import 'package:coffee_shop/view/screens/home_screen.dart';
 import 'package:coffee_shop/view/widgets/navigation_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  State<Home> createState() => _HomeScreenState();
+  State<MainScreen> createState() => _MainScreenScreenState();
 }
 
-class _HomeScreenState extends State<Home> {
+class _MainScreenScreenState extends State<MainScreen> {
   late PageController _pageController = PageController();
 
   int _currentPageIndex = 0;
 
   final List<Widget> _pages = [
-    const CategoryWiseProducts(),
+    const HomeScreen(),
     const CartScreen(),
     const FavoriteScreen(),
     const ProfileScreen(),
@@ -46,10 +44,6 @@ class _HomeScreenState extends State<Home> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
     return Scaffold(
-      appBar: AppBarWidget(
-        context: context,
-        isThereAutomaticallyImplyLeading: false,
-      ),
       body: PageView(
         scrollDirection: Axis.horizontal,
         controller: _pageController,
