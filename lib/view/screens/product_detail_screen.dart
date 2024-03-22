@@ -15,7 +15,8 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int _quantity = 1;
-  double _netProductPrice = 0;
+
+  double _increasingFactor = 1;
 
   void _increment() {
     setState(() {
@@ -31,27 +32,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     }
   }
 
-  void updateNetPrice(double increasingFactor) {
-    setState(() {
-      _netProductPrice = _netProductPrice + increasingFactor;
-    });
-  }
-
-  @override
-  void initState() {
-    Product product =
-        productsList.firstWhere((element) => element.id == widget.productId);
-    _netProductPrice = product.price;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     Product product =
         productsList.firstWhere((element) => element.id == widget.productId);
-    _netProductPrice = _netProductPrice * _quantity;
-    double priceFor50ml = product.price / 7;
-    double priceFor100ml = priceFor50ml * 2;
+    double netProductPrice = product.price * _increasingFactor;
 
     final deviceSize = MediaQuery.of(context).size;
 
@@ -188,20 +173,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         sizes: const [350, 400, 450],
                         onSelected: (size) {
                           print('selected size: $size');
-                          if (size == 400) {
-                            updateNetPrice(priceFor50ml);
-                          }
-                          if (size == 450) {
-                            updateNetPrice(priceFor100ml);
-                          }
-                          print(_netProductPrice);
+                          setState(() {
+                            _increasingFactor = size == 400
+                                ? 1.1429
+                                : size == 450
+                                    ? 1.2858
+                                    : 1;
+                          });
                         }),
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   Text(
-                    '\$${_netProductPrice.toStringAsFixed(2)}',
+                    '\$${netProductPrice.toStringAsFixed(2)}',
                     style: TextStyle(
                       color: Theme.of(context).scaffoldBackgroundColor,
                       fontSize: 19,
