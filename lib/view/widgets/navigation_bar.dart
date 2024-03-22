@@ -17,8 +17,17 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   Widget build(BuildContext context) {
     int currentIndex = widget.currentPageIndex;
     return Container(
-      decoration: const BoxDecoration(
-        border: Border(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey
+                .withOpacity(0.5), // Adjust opacity for shadow intensity
+            blurRadius: 5.0, // Adjust blurRadius for shadow spread
+            offset: const Offset(
+                0.0, -2.0), // Adjust offset for shadow position (right, down)
+          ),
+        ],
+        border: const Border(
           top: BorderSide(color: Colors.grey),
         ),
       ),
