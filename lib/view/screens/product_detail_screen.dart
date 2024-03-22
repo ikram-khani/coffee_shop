@@ -14,26 +14,44 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  int _count = 1;
+  int _quantity = 1;
+  double _netProductPrice = 0;
 
   void _increment() {
     setState(() {
-      _count++;
+      _quantity++;
     });
   }
 
   void _decrement() {
-    if (_count > 1) {
+    if (_quantity > 1) {
       setState(() {
-        _count--;
+        _quantity--;
       });
     }
+  }
+
+  void updateNetPrice(double increasingFactor) {
+    setState(() {
+      _netProductPrice = _netProductPrice + increasingFactor;
+    });
+  }
+
+  @override
+  void initState() {
+    Product product =
+        productsList.firstWhere((element) => element.id == widget.productId);
+    _netProductPrice = product.price;
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     Product product =
         productsList.firstWhere((element) => element.id == widget.productId);
+    _netProductPrice = _netProductPrice * _quantity;
+    double priceFor50ml = product.price / 7;
+    double priceFor100ml = priceFor50ml * 2;
 
     final deviceSize = MediaQuery.of(context).size;
 
@@ -170,13 +188,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         sizes: const [350, 400, 450],
                         onSelected: (size) {
                           print('selected size: $size');
+                          if (size == 400) {
+                            updateNetPrice(priceFor50ml);
+                          }
+                          if (size == 450) {
+                            updateNetPrice(priceFor100ml);
+                          }
+                          print(_netProductPrice);
                         }),
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   Text(
-                    '\$${product.price}',
+                    '\$${_netProductPrice.toStringAsFixed(2)}',
                     style: TextStyle(
                       color: Theme.of(context).scaffoldBackgroundColor,
                       fontSize: 19,
@@ -211,7 +236,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               ),
                             ),
                             Text(
-                              _count.toString(),
+                              _quantity.toString(),
                               style: TextStyle(
                                 color:
                                     Theme.of(context).scaffoldBackgroundColor,
