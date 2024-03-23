@@ -32,15 +32,21 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double appBarHeight = 100.0;
     return Scaffold(
-      appBar: AppBar(
-        titleSpacing: -5,
-        leadingWidth: 60,
-        iconTheme: IconThemeData(
-          color: Theme.of(context).primaryColor,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(appBarHeight),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 12.0, right: 5, left: 7),
+          child: AppBar(
+            titleSpacing: -5,
+            iconTheme: IconThemeData(
+              color: Theme.of(context).primaryColor,
+            ),
+            toolbarHeight: 130,
+            title: _buildSearchField(_focusNode),
+          ),
         ),
-        toolbarHeight: 130,
-        title: _buildSearchField(_focusNode),
       ),
       body: GestureDetector(
         onTap: () => _focusNode.unfocus(),
@@ -92,7 +98,7 @@ class _SearchScreenState extends State<SearchScreen> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
       ),
-      width: deviceWidth / 1.30,
+      width: deviceWidth / 1.26,
       height: 50,
       child: TextField(
         controller: _textEditingController,
@@ -100,13 +106,15 @@ class _SearchScreenState extends State<SearchScreen> {
         textInputAction: TextInputAction.search,
         focusNode: focusNode,
         decoration: InputDecoration(
-            suffixIcon: GestureDetector(
-              onTap: () {
+            suffixIcon: IconButton(
+              onPressed: () {
                 _textEditingController.clear();
                 _filterProducts('');
               },
-              child: const Icon(
+              icon: Icon(
                 Icons.clear,
+                size: 22,
+                color: Theme.of(context).primaryColor.withOpacity(0.8),
               ),
             ),
             contentPadding: const EdgeInsets.symmetric(
