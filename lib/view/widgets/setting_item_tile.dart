@@ -21,7 +21,7 @@ class SettingItemTile extends StatelessWidget {
         title,
         style: const TextStyle(
           fontWeight: FontWeight.w500,
-          fontSize: 14,
+          fontSize: 12,
         ),
       ),
       trailing: Row(
