@@ -1,3 +1,5 @@
+import 'package:coffee_shop/view/screens/settings_screen.dart';
+
 import 'custom_menu_item.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +42,13 @@ class PopupMenuButtonWidget extends StatelessWidget {
           CustomMenuItem(
             leading: const Icon(Icons.settings_outlined),
             title: 'Settings',
-            onTaping: () {},
+            onTaping: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => SettingsScreen(),
+                ),
+              );
+            },
             divider: const Column(
               children: [
                 SizedBox(
