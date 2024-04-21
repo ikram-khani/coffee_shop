@@ -1,8 +1,7 @@
 import 'package:coffee_shop/view/widgets/setting_item_tile.dart';
+import 'package:coffee_shop/view_models/location_data_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -12,59 +11,11 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _isLocEnabled = false;
-  Position? _currentLocation;
-
-  Future<void> _loadLocationEnabledState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _isLocEnabled = prefs.getBool('isLocEnabled') ?? false;
-    });
-  }
-
-  Future<void> _saveLocationEnabledState(bool value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isLocEnabled', value);
-  }
-
-  Future<void> _requestLocationPermission() async {
-    final permissionStatus = await Permission.locationWhenInUse.status;
-    if (permissionStatus.isGranted) {
-      // Permission already granted, proceed with location access
-      _getCurrentLocation();
-      setState(
-        () => _isLocEnabled = true,
-      );
-      _saveLocationEnabledState(true); // Save state to shared preferences
-    } else {
-      final locationStatus = await Permission.locationWhenInUse.request();
-      if (locationStatus.isGranted) {
-        setState(
-          () => _isLocEnabled = true,
-        );
-        _getCurrentLocation();
-        _saveLocationEnabledState(true);
-      } else {
-        // Handle permission denial or limited access (e.g., show a snackbar)
-      }
-    }
-  }
-
-  Future<void> _getCurrentLocation() async {
-    try {
-      final position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      setState(() => _currentLocation = position);
-      print('Latitude: ${position.latitude}, Longitude: ${position.longitude}');
-    } catch (error) {
-      print('Error getting location: $error');
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    _loadLocationEnabledState();
+    Provider.of<LocationDataProvider>(context, listen: false)
+        .loadLocationEnabledState();
   }
 
   @override
@@ -101,12 +52,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(
                 height: 5,
               ),
-              SettingItemTile(
+              const SettingItemTile(
                 leadingIcon: Icons.light_mode_outlined,
                 title: 'Theme',
                 trailingText: 'Light Mode',
               ),
-              SettingItemTile(
+              const SettingItemTile(
                 leadingIcon: Icons.translate,
                 title: 'Language',
                 trailingText: 'English',
@@ -121,25 +72,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     fontSize: 12,
                   ),
                 ),
-                trailing: Switch(
-                  value: _isLocEnabled,
-                  onChanged: (value) async {
-                    if (value) {
-                      await _requestLocationPermission();
-                    } else {
-                      setState(
-                        () => _isLocEnabled = false,
-                      );
-                      _currentLocation = null;
-                      _saveLocationEnabledState(false);
-                    }
+                trailing: Consumer<LocationDataProvider>(
+                  builder: (context, provider, child) {
+                    bool isLocationEnabled = provider.isLocEnabled;
+                    return Switch(
+                      value: isLocationEnabled,
+                      onChanged: (value) async {
+                        if (value) {
+                          await provider.requestLocationPermission();
+                        } else {
+                          await provider.saveLocationEnabledState(false);
+                        }
+                      },
+                      activeColor: Colors.blue,
+                      inactiveTrackColor: Colors.grey.withOpacity(0.4),
+                      activeTrackColor: Colors.blue,
+                      thumbColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.white,
+                      ),
+                    );
                   },
-                  activeColor: Colors.blue,
-                  inactiveTrackColor: Colors.grey.withOpacity(0.4),
-                  activeTrackColor: Colors.blue,
-                  thumbColor: MaterialStateColor.resolveWith(
-                    (states) => Colors.white,
-                  ),
                 ),
               ),
               const SizedBox(
@@ -154,18 +106,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(
                 height: 10,
               ),
-              SettingItemTile(
+              const SettingItemTile(
                 leadingIcon: Icons.person_4_outlined,
                 title: 'Account Information',
               ),
-              SettingItemTile(
+              const SettingItemTile(
                 leadingIcon: Icons.verified_user_outlined,
                 title: 'Security & Authentications',
               ),
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 'Other',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -174,15 +126,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(
                 height: 10,
               ),
-              SettingItemTile(
+              const SettingItemTile(
                 leadingIcon: Icons.lock_outline,
                 title: 'Privacy Policy',
               ),
-              SettingItemTile(
+              const SettingItemTile(
                 leadingIcon: Icons.description_outlined,
                 title: 'Terms & Conditions',
               ),
-              SettingItemTile(
+              const SettingItemTile(
                 leadingIcon: Icons.people_outline_outlined,
                 title: 'About us',
               ),
