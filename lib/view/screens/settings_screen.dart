@@ -1,5 +1,7 @@
 import 'package:coffee_shop/view/widgets/setting_item_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -10,6 +12,32 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _isLocEnabled = false;
+
+  Position? _currentLocation;
+
+  Future<void> _requestLocationPermission() async {
+    final locationStatus = await Permission.locationWhenInUse.request();
+    if (locationStatus.isGranted) {
+      setState(
+        () => _isLocEnabled = true,
+      );
+      _getCurrentLocation();
+    } else {
+      // Handle permission denial or limited access (e.g., show a snackbar)
+    }
+  }
+
+  Future<void> _getCurrentLocation() async {
+    try {
+      final position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      setState(() => _currentLocation = position);
+      print('Latitude: ${position.latitude}, Longitude: ${position.longitude}');
+    } catch (error) {
+      print('Error getting location: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double appBarHeight = 70.0;
@@ -19,7 +47,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         preferredSize: Size.fromHeight(appBarHeight),
         child: AppBar(
           centerTitle: true,
-          title: const Text('Settings'),
+          title: const Text(
+            'Settings',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 18,
+            ),
+          ),
           toolbarHeight: 70,
         ),
       ),
@@ -60,18 +94,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 trailing: Switch(
                   value: _isLocEnabled,
-                  onChanged: (value) {
-                    setState(() {
-                      _isLocEnabled = !_isLocEnabled;
-                    });
+                  onChanged: (value) async {
+                    if (value) {
+                      await _requestLocationPermission();
+                    } else {
+                      setState(
+                        () => _isLocEnabled = false,
+                      );
+                      _currentLocation = null; // Clear location data
+                    }
                   },
                   activeColor: Colors.blue,
-                  inactiveThumbColor: Colors.white,
-                  inactiveTrackColor: Colors.grey,
-                  thumbColor:
-                      MaterialStateColor.resolveWith((states) => Colors.white),
+                  inactiveTrackColor: Colors.grey.withOpacity(0.4),
                   activeTrackColor: Colors.blue,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  thumbColor: MaterialStateColor.resolveWith(
+                    (states) => Colors.white,
+                  ),
                 ),
               ),
               const SizedBox(
