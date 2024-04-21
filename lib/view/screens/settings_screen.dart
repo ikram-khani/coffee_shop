@@ -2,6 +2,7 @@ import 'package:coffee_shop/view/widgets/setting_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -12,18 +13,40 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _isLocEnabled = false;
-
   Position? _currentLocation;
 
+  Future<void> _loadLocationEnabledState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _isLocEnabled = prefs.getBool('isLocEnabled') ?? false;
+    });
+  }
+
+  Future<void> _saveLocationEnabledState(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLocEnabled', value);
+  }
+
   Future<void> _requestLocationPermission() async {
-    final locationStatus = await Permission.locationWhenInUse.request();
-    if (locationStatus.isGranted) {
+    final permissionStatus = await Permission.locationWhenInUse.status;
+    if (permissionStatus.isGranted) {
+      // Permission already granted, proceed with location access
+      _getCurrentLocation();
       setState(
         () => _isLocEnabled = true,
       );
-      _getCurrentLocation();
+      _saveLocationEnabledState(true); // Save state to shared preferences
     } else {
-      // Handle permission denial or limited access (e.g., show a snackbar)
+      final locationStatus = await Permission.locationWhenInUse.request();
+      if (locationStatus.isGranted) {
+        setState(
+          () => _isLocEnabled = true,
+        );
+        _getCurrentLocation();
+        _saveLocationEnabledState(true);
+      } else {
+        // Handle permission denial or limited access (e.g., show a snackbar)
+      }
     }
   }
 
@@ -36,6 +59,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     } catch (error) {
       print('Error getting location: $error');
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLocationEnabledState();
   }
 
   @override
@@ -101,7 +130,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       setState(
                         () => _isLocEnabled = false,
                       );
-                      _currentLocation = null; // Clear location data
+                      _currentLocation = null;
+                      _saveLocationEnabledState(false);
                     }
                   },
                   activeColor: Colors.blue,
