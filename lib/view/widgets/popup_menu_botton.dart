@@ -1,3 +1,4 @@
+import 'package:coffee_shop/view/screens/help_screen.dart';
 import 'package:coffee_shop/view/screens/settings_screen.dart';
 
 import 'custom_menu_item.dart';
@@ -61,7 +62,11 @@ class PopupMenuButtonWidget extends StatelessWidget {
           CustomMenuItem(
             leading: const Icon(Icons.help_outline),
             title: 'Help',
-            onTaping: () {},
+            onTaping: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const HelpScreen(),
+              ));
+            },
             divider: const Column(
               children: [
                 SizedBox(
