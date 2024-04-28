@@ -14,23 +14,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   ScrollController _scrollController = ScrollController();
 
-  static List<String> coffeeCategories = [
-    'Espresso',
-    'Latte',
-    'Black Coffee',
-    'Winter Special',
-    'Cappuccino',
-    'Mocha',
-  ];
-  final List<Widget> _homeProductsCategoryPages = [
-    HomeProductsListView(category: coffeeCategories[0]),
-    HomeProductsListView(category: coffeeCategories[1]),
-    HomeProductsListView(category: coffeeCategories[2]),
-    HomeProductsListView(category: coffeeCategories[3]),
-    HomeProductsListView(category: coffeeCategories[4]),
-    HomeProductsListView(category: coffeeCategories[5]),
-  ];
-
   @override
   void dispose() {
     _pageController.dispose();
@@ -47,6 +30,34 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final locale = Localizations.localeOf(context);
+
+    List<String> coffeeCategories = locale.languageCode == 'en'
+        ? [
+            'Espresso',
+            'Latte',
+            'Black Coffee',
+            'Winter Special',
+            'Cappuccino',
+            'Mocha',
+          ]
+        : [
+            'Espresso',
+            'Latte',
+            'Schwarzer Kaffee',
+            'Winter Spezial',
+            'Cappuccino',
+            'Mokka',
+          ];
+    final List<Widget> homeProductsCategoryPages = [
+      HomeProductsListView(category: coffeeCategories[0]),
+      HomeProductsListView(category: coffeeCategories[1]),
+      HomeProductsListView(category: coffeeCategories[2]),
+      HomeProductsListView(category: coffeeCategories[3]),
+      HomeProductsListView(category: coffeeCategories[4]),
+      HomeProductsListView(category: coffeeCategories[5]),
+    ];
+
     return Scaffold(
       appBar: AppBarWidget(
         context: context,
@@ -130,14 +141,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Expanded(
             child: PageView(
-                controller: _pageController,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                    _scrollToCategory(index);
-                  });
-                },
-                children: _homeProductsCategoryPages),
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentIndex = index;
+                  _scrollToCategory(index);
+                });
+              },
+              children: homeProductsCategoryPages,
+            ),
           ),
         ],
       ),

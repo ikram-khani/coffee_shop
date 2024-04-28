@@ -1,7 +1,9 @@
-import 'package:coffee_shop/data/products_data.dart';
 import 'package:coffee_shop/view/widgets/cached_network_mage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../models/product_model.dart';
+import '../../view_models/products_data_provider.dart';
 import '../screens/product_detail_screen.dart';
 
 class CartItemCard extends StatefulWidget {
@@ -17,6 +19,8 @@ class CartItemCard extends StatefulWidget {
 class _CartItemCardState extends State<CartItemCard> {
   @override
   Widget build(BuildContext context) {
+    List<Product> productsList =
+        Provider.of<ProductsDataProvider>(context).getProducts();
     final deviceSize = MediaQuery.of(context).size;
     final products = productsList;
     return InkWell(

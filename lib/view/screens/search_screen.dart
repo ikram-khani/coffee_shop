@@ -1,7 +1,9 @@
-import 'package:coffee_shop/data/products_data.dart';
 import 'package:coffee_shop/models/product_model.dart';
 import 'package:coffee_shop/view/widgets/product_list_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../view_models/products_data_provider.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -19,7 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    _allProducts = productsList;
+    _allProducts = Provider.of<ProductsDataProvider>(context).getProducts();
     _filteredProducts = _allProducts;
   }
 

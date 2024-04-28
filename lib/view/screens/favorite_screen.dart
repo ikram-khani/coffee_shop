@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../../data/products_data.dart';
+import 'package:provider/provider.dart';
+import '../../models/product_model.dart';
+import '../../view_models/products_data_provider.dart';
 import '../widgets/cart_item_card.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -13,6 +14,8 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
+    List<Product> productsList =
+        Provider.of<ProductsDataProvider>(context).getProducts();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,

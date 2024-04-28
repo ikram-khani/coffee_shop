@@ -1,5 +1,6 @@
 import 'package:coffee_shop/view/widgets/setting_item_tile.dart';
 import 'package:coffee_shop/view_models/location_data_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,9 +28,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         preferredSize: Size.fromHeight(appBarHeight),
         child: AppBar(
           centerTitle: true,
-          title: const Text(
-            'Settings',
-            style: TextStyle(
+          title: Text(
+            AppLocalizations.of(context)!.settings,
+            style: const TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 18,
             ),
