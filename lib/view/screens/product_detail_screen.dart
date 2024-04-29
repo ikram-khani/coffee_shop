@@ -37,6 +37,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Locale currentLocale = Localizations.localeOf(context);
+    final currentLanguageCode = currentLocale.languageCode;
     final AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     List<Product> productsList =
         Provider.of<LocaleProvider>(context).getProducts();
@@ -261,14 +263,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             ),
                             padding: MaterialStatePropertyAll(
                               EdgeInsets.symmetric(
-                                horizontal: deviceSize.width / 8,
+                                horizontal: currentLanguageCode == 'de'
+                                    ? deviceSize.width / 12
+                                    : deviceSize.width / 8,
                               ),
                             ),
                           ),
                           onPressed: () {},
-                          child: Text(
-                            appLocalizations.add_to_cart_button_text,
-                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              appLocalizations.add_to_cart_button_text,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12,
+                              ),
+                            ),
                           ),
                         )
                       ],
