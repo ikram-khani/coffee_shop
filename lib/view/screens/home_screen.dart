@@ -1,5 +1,6 @@
 import 'package:coffee_shop/view/widgets/app_bar_widget.dart';
 import 'package:coffee_shop/view/widgets/home_products_listview.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -30,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalization = AppLocalizations.of(context)!;
     final locale = Localizations.localeOf(context);
 
     List<String> coffeeCategories = locale.languageCode == 'en'
@@ -60,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBarWidget(
+        applocalization: AppLocalizations.of(context)!,
         context: context,
         isThereAutomaticallyImplyLeading: false,
       ),
@@ -74,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Align(
               alignment: Alignment.topLeft,
               child: Text(
-                'What would you like to drink ?',
+                appLocalization.home_start_entence,
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   height: 1,

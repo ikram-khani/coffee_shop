@@ -21,6 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     double appBarHeight = 70.0;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -29,7 +30,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: AppBar(
           centerTitle: true,
           title: Text(
-            AppLocalizations.of(context)!.settings,
+            appLocalizations.settings_title_text,
             style: const TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 18,
@@ -44,31 +45,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'General',
-                style: TextStyle(
+              Text(
+                appLocalizations.general_text,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(
                 height: 5,
               ),
-              const SettingItemTile(
+              SettingItemTile(
                 leadingIcon: Icons.light_mode_outlined,
-                title: 'Theme',
+                title: appLocalizations.theme_text,
                 trailingText: 'Light Mode',
               ),
-              const SettingItemTile(
+              SettingItemTile(
                 leadingIcon: Icons.translate,
-                title: 'Language',
+                title: appLocalizations.language_text,
                 trailingText: 'English',
               ),
               ListTile(
                 contentPadding: const EdgeInsets.only(left: 0),
                 leading: const Icon(Icons.location_on_outlined),
-                title: const Text(
-                  'Location',
-                  style: TextStyle(
+                title: Text(
+                  appLocalizations.location_text,
+                  style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 12,
                   ),
@@ -98,57 +99,57 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                'Account & Security',
-                style: TextStyle(
+              Text(
+                appLocalizations.account_and_security_text,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              const SettingItemTile(
+              SettingItemTile(
                 leadingIcon: Icons.person_4_outlined,
-                title: 'Account Information',
+                title: appLocalizations.account_information_text,
               ),
-              const SettingItemTile(
+              SettingItemTile(
                 leadingIcon: Icons.verified_user_outlined,
-                title: 'Security & Authentications',
+                title: appLocalizations.security_and_authentication,
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                'Other',
-                style: TextStyle(
+              Text(
+                appLocalizations.other_text,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              const SettingItemTile(
+              SettingItemTile(
                 leadingIcon: Icons.lock_outline,
-                title: 'Privacy Policy',
+                title: appLocalizations.privacy_policy_text,
               ),
-              const SettingItemTile(
+              SettingItemTile(
                 leadingIcon: Icons.description_outlined,
-                title: 'Terms & Conditions',
+                title: appLocalizations.terms_and_conditions_text,
               ),
-              const SettingItemTile(
+              SettingItemTile(
                 leadingIcon: Icons.people_outline_outlined,
-                title: 'About us',
+                title: appLocalizations.about_us_text,
               ),
-              const ListTile(
-                contentPadding: EdgeInsets.only(left: 0),
+              ListTile(
+                contentPadding: const EdgeInsets.only(left: 0),
                 title: Text(
-                  'App Version',
-                  style: TextStyle(
+                  appLocalizations.app_version_text,
+                  style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 12,
                   ),
                 ),
-                trailing: Text('1.0.0'),
+                trailing: const Text('1.0.0'),
               ),
             ],
           ),

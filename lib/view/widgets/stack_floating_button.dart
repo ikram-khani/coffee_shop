@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StackFloatingButton extends StatelessWidget {
   final Function() onPressed;
-  const StackFloatingButton({required this.onPressed, super.key});
+  final AppLocalizations appLocalizations;
+
+  const StackFloatingButton({
+    required this.onPressed,
+    super.key,
+    required this.appLocalizations,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +45,7 @@ class StackFloatingButton extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Total',
+                    appLocalizations.total_text,
                     style: TextStyle(
                       color: Theme.of(context).primaryColor.withOpacity(0.8),
                       fontWeight: FontWeight.bold,
@@ -57,7 +64,7 @@ class StackFloatingButton extends StatelessWidget {
                 width: 10,
               ),
               Text(
-                'Checkout',
+                appLocalizations.checkout_text,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
                 ),

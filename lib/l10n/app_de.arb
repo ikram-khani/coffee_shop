@@ -1,5 +1,68 @@
 {
     "@@locale": "de",
-    "title": "IK Café",
-    "settings" : "Einstellungen"
-}
+    "app_title": "IK's Kaffeehaus",
+    "bottom_navbar_item1": "Startseite",
+    "bottom_navbar_item2": "Warenkorb",
+    "bottom_navbar_item3": "Favoriten",
+    "bottom_navbar_item4": "Profil",
+  
+    "home_appbar_title": "IK's Kaffeehaus",
+    "home_start_entence": "Was möchten Sie trinken?",
+    "popup_button_item1": "Profil",
+    "popup_button_item2": "Einstellungen",
+    "popup_button_item3": "Hilfe",
+    "popup_button_item4": "Ausloggen",
+  
+    "add_to_cart_button_text": "IN DEN WARENKORB",
+  
+    "search_field_placeholder": "Suchen Sie Ihren Kaffee",
+    "search_result_text": "Suchergebnisse",
+  
+    "cart_title": "Mein Warenkorb",
+    "total_text": "gesamt",
+    "checkout_text": "Auschecken",
+
+  
+    "favorite_title_text": "Favorit",
+  
+    "profile_title_text": "Profil",
+    "email_text": "E-Mail",
+    "dob_text": "Geburtsdatum",
+    "gender_text": "Geschlecht",
+    "phone_text": "Telefon",
+    "change_password_text": "Passwort ändern",
+    "my_orders_text": "Meine Bestellungen",
+    "help_text": "Hilfe",
+  
+    "settings_title_text": "Einstellungen",
+    "general_text": "Allgemeines",
+    "theme_text": "Thema",
+    "language_text": "Sprache",
+    "location_text": "Ort",
+    "account_and_security_text": "Konto & Sicherheit",
+    "account_information_text": "Kontoinformationen",
+    "security_and_authentication": "Sicherheit & Authentifizierung",
+    "other_text": "Andere",
+    "privacy_policy_text": "Datenschutz-Bestimmungen",
+    "terms_and_conditions_text": "Nutzungsbedingungen",
+    "about_us_text": "Über uns",
+    "app_version_text": "App-Version",
+  
+    "help_title_text": "Hilfe & Support",
+    "purpose_overview_title": "Zweck & Überblick:",
+    "purpose_and_overview_discription": "IK Kaffeehaus ist Ihre App zum Entdecken und Bestellen Ihrer Lieblingskaffeegetränke. Entdecken Sie unser Menü, passen Sie Ihre Bestellungen an und genießen Sie die Bequemlichkeit der mobilen Bestellung!",
+    "getting_started_title": "Erste Schritte:",
+    "getting_started_steps": "1. Laden Sie die IK Kaffeehaus App herunter und installieren Sie sie.\n2. Melden Sie sich an oder registrieren Sie sich für ein Konto.\n3. Durchsuchen Sie das Menü, passen Sie Ihren Kaffee an und fügen Sie Artikel Ihrem Warenkorb hinzu.\n4. Gehen Sie zur Kasse, wählen Sie eine Zahlungsmethode und geben Sie Ihre Bestellung auf.",
+    "faq_title": "FAQs:",
+    "faq_q1": "Wie kann ich eine Bestellung aufgeben?",
+    "faq_answer1": "Um eine Bestellung aufzugeben, durchsuchen Sie unser Menü, wählen Sie Ihre gewünschten Kaffeegetränke aus, passen Sie sie nach Ihren Vorlieben an und fügen Sie sie Ihrem Warenkorb hinzu. Gehen Sie zur Kasse, wählen Sie eine Zahlungsmethode und bestätigen Sie Ihre Bestellung.",
+    "faq_q2": "Kann ich meine Kaffeebestellungen anpassen?",
+    "faq_answer2": "Ja, Sie können Ihre Kaffeebestellungen anpassen, indem Sie die Art des Kaffees, die Größe, die Milchpräferenz und zusätzliche Toppings oder Aromen auswählen, sofern verfügbar.",
+    "faq_q3": "Wie verfolge ich meine Bestellung?",
+    "faq_answer3": "Sobald Sie eine Bestellung aufgegeben haben, können Sie deren Status in der App verfolgen. Sie erhalten Benachrichtigungen über die Bestellbestätigung, die Vorbereitung und die geschätzte Liefer- oder Abholzeit.",
+    "faq_q4": "Welche Zahlungsmethoden werden akzeptiert?",
+    "faq_answer4": "Wir akzeptieren verschiedene Zahlungsmethoden, einschließlich Kredit-/Debitkarten, mobiler Geldbörsen und Barzahlung bei Lieferung, sofern verfügbar in Ihrem Standort.",
+    "contact_title_text": "Kontaktieren Sie den Support über WhatsApp",
+    "whatsapp_default_message": "Hallo IK Kaffeehaus! Ich brauche Hilfe."
+  }
+  

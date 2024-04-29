@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   final void Function(int) onItemSelection;
@@ -15,6 +16,8 @@ class CustomNavigationBar extends StatefulWidget {
 class _CustomNavigationBarState extends State<CustomNavigationBar> {
   @override
   Widget build(BuildContext context) {
+    final appLocalization = AppLocalizations.of(context);
+
     int currentIndex = widget.currentPageIndex;
     return Container(
       decoration: BoxDecoration(
@@ -42,13 +45,13 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             });
           },
           destinations: [
-            const NavigationDestination(
-              icon: Icon(
+            NavigationDestination(
+              icon: const Icon(
                 Icons.home_outlined,
                 size: 25,
               ),
-              selectedIcon: Icon(Icons.home),
-              label: 'Home',
+              selectedIcon: const Icon(Icons.home),
+              label: appLocalization!.bottom_navbar_item1,
             ),
             NavigationDestination(
               icon: Badge(
@@ -58,17 +61,17 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 child: const Icon(Icons.shopping_cart_outlined),
               ),
               selectedIcon: const Icon(Icons.shopping_cart),
-              label: 'Cart',
+              label: appLocalization.bottom_navbar_item2,
             ),
-            const NavigationDestination(
-              icon: Icon(Icons.favorite_outline),
-              selectedIcon: Icon(Icons.favorite),
-              label: 'Favorite',
+            NavigationDestination(
+              icon: const Icon(Icons.favorite_outline),
+              selectedIcon: const Icon(Icons.favorite),
+              label: appLocalization.bottom_navbar_item3,
             ),
-            const NavigationDestination(
-              icon: Icon(Icons.person_2_outlined),
-              selectedIcon: Icon(Icons.person_2),
-              label: 'Profile',
+            NavigationDestination(
+              icon: const Icon(Icons.person_2_outlined),
+              selectedIcon: const Icon(Icons.person_2),
+              label: appLocalization.bottom_navbar_item4,
             ),
           ]),
     );

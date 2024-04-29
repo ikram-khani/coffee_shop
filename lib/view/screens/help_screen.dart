@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/faq_item.dart';
 
 class HelpScreen extends StatelessWidget {
-  const HelpScreen({super.key});
+  final AppLocalizations appLocalizations;
+  const HelpScreen({required this.appLocalizations, super.key});
 
   final String whatsappNumber = '+923089685902';
-  final String defaultMessage = 'Hello Ik Coffee Craze! I need some help.';
 
   void _launchWhatsApp() async {
     String url =
-        'https://wa.me/$whatsappNumber?text=${Uri.encodeFull(defaultMessage)}';
+        'https://wa.me/$whatsappNumber?text=${Uri.encodeFull(appLocalizations.whatsapp_default_message)}';
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
     } else {
@@ -23,8 +24,8 @@ class HelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Help & Support',
+        title: Text(
+          appLocalizations.help_title_text,
         ),
       ),
       body: SingleChildScrollView(
@@ -33,58 +34,54 @@ class HelpScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Purpose and Overview:',
+              appLocalizations.purpose_overview_title,
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey.shade700,
               ),
             ),
-            const Text(
-              'Ik Coffee Craze is your go-to app for discovering and ordering your favorite coffee drinks. Explore our menu, customize your orders, and enjoy the convenience of mobile ordering!',
-              style: TextStyle(fontSize: 16.0),
+            Text(
+              appLocalizations.purpose_and_overview_discription,
+              style: const TextStyle(fontSize: 16.0),
             ),
             const SizedBox(height: 16.0),
             Text(
-              'Getting Started:',
+              appLocalizations.getting_started_title,
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey.shade700,
               ),
             ),
-            const Text(
-              '1. Download and install the Ik Coffee Craze app.\n2. Sign up or log in to your account.\n3. Browse the menu, customize your coffee, and add items to your cart.\n4. Proceed to checkout, select a payment method, and place your order.',
-              style: TextStyle(fontSize: 16.0),
+            Text(
+              appLocalizations.getting_started_steps,
+              style: const TextStyle(fontSize: 16.0),
             ),
             const SizedBox(height: 16.0),
             Text(
-              'FAQs:',
+              appLocalizations.faq_title,
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey.shade700,
               ),
             ),
-            const FaqItem(
-              question: 'How do I place an order?',
-              answer:
-                  'To place an order, browse our menu, select your desired coffee drinks, customize them as per your preference, and add them to your cart. Proceed to checkout, choose a payment method, and confirm your order.',
+            FaqItem(
+              question: appLocalizations.faq_q1,
+              answer: appLocalizations.faq_answer1,
             ),
-            const FaqItem(
-              question: 'Can I customize my coffee orders?',
-              answer:
-                  'Yes, you can customize your coffee orders by choosing the type of coffee, size, milk preference, and additional toppings or flavors as available.',
+            FaqItem(
+              question: appLocalizations.faq_q2,
+              answer: appLocalizations.faq_answer2,
             ),
-            const FaqItem(
-              question: 'How do I track my order?',
-              answer:
-                  'Once you place an order, you can track its status in the app. You will receive notifications regarding the order confirmation, preparation, and estimated delivery or pickup time.',
+            FaqItem(
+              question: appLocalizations.faq_q3,
+              answer: appLocalizations.faq_answer3,
             ),
-            const FaqItem(
-              question: 'What payment methods are accepted?',
-              answer:
-                  'We accept various payment methods, including credit/debit cards, mobile wallets, and cash on delivery, as available in your location.',
+            FaqItem(
+              question: appLocalizations.faq_q4,
+              answer: appLocalizations.faq_answer4,
             ),
             const SizedBox(height: 32.0),
             ElevatedButton.icon(
@@ -94,7 +91,7 @@ class HelpScreen extends StatelessWidget {
                 width: 24.0,
                 height: 24.0,
               ),
-              label: const Text('Contact Support on WhatsApp'),
+              label: Text(appLocalizations.contact_title_text),
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.green,

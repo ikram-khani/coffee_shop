@@ -3,7 +3,7 @@ import 'package:coffee_shop/view/widgets/product_list_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../view_models/products_data_provider.dart';
+import '../../view_models/locale_provider.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -21,8 +21,12 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    _allProducts = Provider.of<ProductsDataProvider>(context).getProducts();
+    _allProducts = getProducts();
     _filteredProducts = _allProducts;
+  }
+
+  List<Product> getProducts() {
+    return Provider.of<LocaleProvider>(context, listen: false).getProducts();
   }
 
   @override

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/product_model.dart';
-import '../../view_models/products_data_provider.dart';
+import '../../view_models/locale_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../widgets/cart_item_card.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -14,14 +16,15 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
+    final appLocalization = AppLocalizations.of(context)!;
     List<Product> productsList =
-        Provider.of<ProductsDataProvider>(context).getProducts();
+        Provider.of<LocaleProvider>(context).getProducts();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
         centerTitle: true,
         title: Text(
-          'Favorite',
+          appLocalization.favorite_title_text,
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w500,

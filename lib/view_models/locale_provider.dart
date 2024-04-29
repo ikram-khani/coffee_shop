@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../models/product_model.dart';
 
-class ProductsDataProvider with ChangeNotifier {
-  String _locale = 'de';
+class LocaleProvider with ChangeNotifier {
+  String _locale = 'en';
 
   String get locale => _locale;
 

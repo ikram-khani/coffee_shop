@@ -2,10 +2,11 @@ import 'package:coffee_shop/models/product_model.dart';
 import 'package:coffee_shop/view/widgets/app_bar_widget.dart';
 import 'package:coffee_shop/view/widgets/cached_network_mage.dart';
 import 'package:coffee_shop/view/widgets/size_toggle_buttons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../view_models/products_data_provider.dart';
+import '../../view_models/locale_provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final int productId;
@@ -37,7 +38,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     List<Product> productsList =
-        Provider.of<ProductsDataProvider>(context).getProducts();
+        Provider.of<LocaleProvider>(context).getProducts();
     Product product =
         productsList.firstWhere((element) => element.id == widget.productId);
     double netProductPrice = product.price * _increasingFactor;
@@ -46,6 +47,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
     return Scaffold(
       appBar: AppBarWidget(
+        applocalization: AppLocalizations.of(context)!,
         context: context,
         isThereAutomaticallyImplyLeading: true,
       ),

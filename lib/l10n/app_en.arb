@@ -1,6 +1,75 @@
 {
   "@@locale": "en",
-    "title": "IK Coffee Shop",
-    "helloWorld": "Hello World!",
-    "settings" : "Settings"
+    "app_title": "IK Coffee Shop",
+    "bottom_navbar_item1":"Home",
+    "bottom_navbar_item2":"Cart",
+    "bottom_navbar_item3":"Favorite",
+    "bottom_navbar_item4":"Profile",
+
+    "home_appbar_title": "IK's Coffe Shop",
+    "home_start_entence" : "What would you like to drink ?",
+    "popup_button_item1":"Profile",
+    "popup_button_item2":"Settings",
+    "popup_button_item3":"Help",
+    "popup_button_item4":"Logout",
+
+    "add_to_cart_button_text":"ADD TO CART",
+
+    "search_field_placeholder": "Search Your Coffee",
+    "search_result_text": "Search results",
+
+    "cart_title": "My Cart",
+    "total_text": "Total",
+    "checkout_text": "Checkout",
+
+
+    "favorite_title_text": "Favorite",
+
+    "profile_title_text": "Profile",
+    "email_text":"Email",
+    "dob_text":"Date of birth",
+    "gender_text":"Gender",
+    "phone_text":"Phone",
+    "change_password_text": "Change Password",
+    "my_orders_text":"My  Orders",
+    "help_text": "Help",
+
+
+    "settings_title_text": "Settings",
+    "general_text": "General",
+    "theme_text": "Theme",
+    "language_text": "Language",
+    "location_text": "Location",
+    "account_and_security_text":"Account & Security",
+    "account_information_text": "Account Information",
+    "security_and_authentication": "Security & Authentications",
+    "other_text": "Other",
+    "privacy_policy_text":"Privacy Policy",
+    "terms_and_conditions_text":"Terms & Conditions",
+    "about_us_text":"About Us",
+    "app_version_text": "App Version",
+
+
+    "help_title_text": "Help & Support",
+    "purpose_overview_title": "Purpose & Overview:",
+    "purpose_and_overview_discription": "Ik Coffee Shop is your go-to app for discovering and ordering your favorite coffee drinks. Explore our menu, customize your orders, and enjoy the convenience of mobile ordering!",
+    "getting_started_title": "Getting Started:",
+    "getting_started_steps": "1. Download and install the Ik Coffee Shop app.\n2. Sign up or log in to your account.\n3. Browse the menu, customize your coffee, and add items to your cart.\n4. Proceed to checkout, select a payment method, and place your order.",
+    "faq_title": "FAQs:",
+    "faq_q1":"How do I place an order?",
+    "faq_answer1":"To place an order, browse our menu, select your desired coffee drinks, customize them as per your preference, and add them to your cart. Proceed to checkout, choose a payment method, and confirm your order.",
+    "faq_q2":"Can I customize my coffee orders?",
+    "faq_answer2":"Yes, you can customize your coffee orders by choosing the type of coffee, size, milk preference, and additional toppings or flavors as available.",
+    "faq_q3":"How do I track my order?",
+    "faq_answer3":"Once you place an order, you can track its status in the app. You will receive notifications regarding the order confirmation, preparation, and estimated delivery or pickup time.",
+    "faq_q4":"What payment methods are accepted?",
+    "faq_answer4":"We accept various payment methods, including credit/debit cards, mobile wallets, and cash on delivery, as available in your location.",
+    "contact_title_text": "Contact Support on WhatsApp",
+    "whatsapp_default_message": "Hello Ik Coffee Shop! I need some help."
+
+
+
+
+
+  
  }

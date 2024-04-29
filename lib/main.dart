@@ -1,6 +1,6 @@
 import 'package:coffee_shop/view/screens/main_screen.dart';
 import 'package:coffee_shop/view_models/location_data_provider.dart';
-import 'package:coffee_shop/view_models/products_data_provider.dart';
+import 'package:coffee_shop/view_models/locale_provider.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_localizations/flutter_localizations.dart'; //for manually using delegate
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,7 +14,7 @@ void main() {
           create: (context) => LocationDataProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => ProductsDataProvider(),
+          create: (context) => LocaleProvider(),
         ),
       ],
       child: const MyApp(),
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final producDataProvider =
-        Provider.of<ProductsDataProvider>(context, listen: false);
+        Provider.of<LocaleProvider>(context, listen: false);
 
     return MaterialApp(
       locale: Locale(producDataProvider.locale),
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
-      onGenerateTitle: (context) => AppLocalizations.of(context)!.title,
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.app_title,
       // title: 'Coffee Shop',
       theme: ThemeData(
         scaffoldBackgroundColor: const Color.fromRGBO(237, 215, 191, 1),

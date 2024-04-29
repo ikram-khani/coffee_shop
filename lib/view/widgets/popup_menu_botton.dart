@@ -1,5 +1,6 @@
 import 'package:coffee_shop/view/screens/help_screen.dart';
 import 'package:coffee_shop/view/screens/settings_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'custom_menu_item.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class PopupMenuButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalization = AppLocalizations.of(context)!;
     return PopupMenuButton(
       iconColor: Theme.of(context).primaryColor,
       padding: EdgeInsets.zero,
@@ -23,7 +25,7 @@ class PopupMenuButtonWidget extends StatelessWidget {
         return [
           CustomMenuItem(
             leading: const Icon(Icons.person),
-            title: 'Profile',
+            title: appLocalization.popup_button_item1,
             onTaping: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -42,11 +44,11 @@ class PopupMenuButtonWidget extends StatelessWidget {
           ),
           CustomMenuItem(
             leading: const Icon(Icons.settings_outlined),
-            title: 'Settings',
+            title: appLocalization.popup_button_item2,
             onTaping: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => SettingsScreen(),
+                  builder: (context) => const SettingsScreen(),
                 ),
               );
             },
@@ -61,10 +63,12 @@ class PopupMenuButtonWidget extends StatelessWidget {
           ),
           CustomMenuItem(
             leading: const Icon(Icons.help_outline),
-            title: 'Help',
+            title: appLocalization.popup_button_item3,
             onTaping: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const HelpScreen(),
+                builder: (context) => HelpScreen(
+                  appLocalizations: appLocalization,
+                ),
               ));
             },
             divider: const Column(
@@ -78,7 +82,7 @@ class PopupMenuButtonWidget extends StatelessWidget {
           ),
           CustomMenuItem(
             leading: const Icon(Icons.logout_outlined),
-            title: 'Logout',
+            title: appLocalization.popup_button_item4,
             onTaping: () {},
           ),
         ];

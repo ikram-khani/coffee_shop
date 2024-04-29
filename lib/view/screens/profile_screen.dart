@@ -2,6 +2,7 @@ import 'package:coffee_shop/view/widgets/info_action_tile.dart';
 import 'package:coffee_shop/view/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -13,11 +14,12 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Profile',
+          appLocalizations.profile_title_text,
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w500,
@@ -81,29 +83,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const InfoTile(
-                        titleText: 'Email',
+                      InfoTile(
+                        titleText: appLocalizations.email_text,
                         valueText: 'zahoorkhani@gmail.com',
                       ),
                       Divider(
                         color: Colors.grey.withOpacity(0.1),
                       ),
-                      const InfoTile(
-                        titleText: 'Date of birth',
+                      InfoTile(
+                        titleText: appLocalizations.dob_text,
                         valueText: '12/04/2003',
                       ),
                       Divider(
                         color: Colors.grey.withOpacity(0.1),
                       ),
-                      const InfoTile(
-                        titleText: 'Gender',
+                      InfoTile(
+                        titleText: appLocalizations.gender_text,
                         valueText: 'Male',
                       ),
                       Divider(
                         color: Colors.grey.withOpacity(0.1),
                       ),
-                      const InfoTile(
-                        titleText: 'Phone',
+                      InfoTile(
+                        titleText: appLocalizations.phone_text,
                         valueText: '+9230108182938',
                       ),
                       const SizedBox(
@@ -111,7 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       InfoActionTile(
                         icon: Icons.lock_outline,
-                        title: 'Change Password',
+                        title: appLocalizations.change_password_text,
                         iconColor:
                             Theme.of(context).primaryColor.withOpacity(0.6),
                         iconBackgroundColor: Theme.of(context)
@@ -123,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       InfoActionTile(
                         icon: FontAwesomeIcons.clipboardList,
-                        title: 'My Orders',
+                        title: appLocalizations.my_orders_text,
                         iconColor: Colors.green,
                         iconBackgroundColor: Colors.green.withOpacity(0.3),
                       ),
@@ -133,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       InfoActionTile(
                         icon: Icons.live_help_outlined,
-                        title: 'Help',
+                        title: appLocalizations.help_text,
                         iconColor: Colors.purple,
                         iconBackgroundColor: Colors.purple.withOpacity(0.3),
                       ),

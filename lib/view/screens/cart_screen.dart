@@ -1,6 +1,8 @@
 import 'package:coffee_shop/view/widgets/cart_item_card.dart';
 import 'package:coffee_shop/view/widgets/stack_floating_button.dart';
-import 'package:coffee_shop/view_models/products_data_provider.dart';
+import 'package:coffee_shop/view_models/locale_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,14 +18,15 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+    final appLocalization = AppLocalizations.of(context)!;
     List<Product> productsList =
-        Provider.of<ProductsDataProvider>(context).getProducts();
+        Provider.of<LocaleProvider>(context).getProducts();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
         centerTitle: true,
         title: Text(
-          'My Cart',
+          appLocalization.cart_title,
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w500,
@@ -53,6 +56,7 @@ class _CartScreenState extends State<CartScreen> {
             },
           ),
           StackFloatingButton(
+            appLocalizations: appLocalization,
             onPressed: () => print('checkout successful'),
           ),
         ],
