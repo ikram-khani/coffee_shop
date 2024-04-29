@@ -37,6 +37,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     List<Product> productsList =
         Provider.of<LocaleProvider>(context).getProducts();
     Product product =
@@ -47,7 +48,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
     return Scaffold(
       appBar: AppBarWidget(
-        applocalization: AppLocalizations.of(context)!,
+        applocalization: appLocalizations,
         context: context,
         isThereAutomaticallyImplyLeading: true,
       ),
@@ -265,9 +266,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             ),
                           ),
                           onPressed: () {},
-                          child: const Text(
-                            'ADD TO CART',
-                            style: TextStyle(fontWeight: FontWeight.w500),
+                          child: Text(
+                            appLocalizations.add_to_cart_button_text,
+                            style: const TextStyle(fontWeight: FontWeight.w500),
                           ),
                         )
                       ],
