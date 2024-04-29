@@ -11,6 +11,7 @@ class LocaleProvider with ChangeNotifier {
 
   void setLocale(String locale) {
     _locale = locale;
+    notifyListeners();
   }
 
   // Method to load data based on locale

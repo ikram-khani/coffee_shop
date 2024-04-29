@@ -1,5 +1,7 @@
 import 'package:coffee_shop/models/product_model.dart';
 import 'package:coffee_shop/view/widgets/product_list_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,6 +40,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     double appBarHeight = 100.0;
     return Scaffold(
       appBar: PreferredSize(
@@ -50,7 +53,7 @@ class _SearchScreenState extends State<SearchScreen> {
               color: Theme.of(context).primaryColor,
             ),
             toolbarHeight: 130,
-            title: _buildSearchField(_focusNode),
+            title: _buildSearchField(_focusNode, appLocalizations),
           ),
         ),
       ),
@@ -70,7 +73,7 @@ class _SearchScreenState extends State<SearchScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  '${_filteredProducts.length} Search results',
+                  '${_filteredProducts.length} ${appLocalizations.search_result_text}',
                   style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
                 const SizedBox(
@@ -96,7 +99,8 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget _buildSearchField(FocusNode focusNode) {
+  Widget _buildSearchField(
+      FocusNode focusNode, AppLocalizations appLocalizations) {
     double deviceWidth = MediaQuery.of(context).size.width;
 
     return Container(
@@ -127,7 +131,7 @@ class _SearchScreenState extends State<SearchScreen> {
               horizontal: 18,
               vertical: 15,
             ),
-            hintText: 'Search your coffee',
+            hintText: appLocalizations.search_field_placeholder,
             hintStyle: const TextStyle(color: Colors.grey),
             border: InputBorder.none),
         style: const TextStyle(color: Colors.black),

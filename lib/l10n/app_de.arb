@@ -38,6 +38,12 @@
     "general_text": "Allgemeines",
     "theme_text": "Thema",
     "language_text": "Sprache",
+    "language_alert_title":"Sprache auswählen",
+    "language_value_en":"Englisch",
+    "language_value_de":"Deutsch",
+    "select_text":"Auswählen",
+    "cancel_text":"Abbrechen",
+
     "location_text": "Ort",
     "account_and_security_text": "Konto & Sicherheit",
     "account_information_text": "Kontoinformationen",

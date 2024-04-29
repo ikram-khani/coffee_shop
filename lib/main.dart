@@ -27,11 +27,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final producDataProvider =
-        Provider.of<LocaleProvider>(context, listen: false);
+    final localeDataProvider = Provider.of<LocaleProvider>(
+      context,
+    );
 
     return MaterialApp(
-      locale: Locale(producDataProvider.locale),
+      locale: Locale(localeDataProvider.locale),
 
       //Manual delegate providing
       // localizationsDelegates: const [

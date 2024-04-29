@@ -1,4 +1,6 @@
+import 'package:coffee_shop/view/widgets/language_selection_dialog.dart';
 import 'package:coffee_shop/view/widgets/setting_item_tile.dart';
+import 'package:coffee_shop/view_models/locale_provider.dart';
 import 'package:coffee_shop/view_models/location_data_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+    Locale currentLocale = Localizations.localeOf(context);
+
     double appBarHeight = 70.0;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -40,7 +44,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.only(top: 10, left: 30, right: 30),
+        padding: const EdgeInsets.only(top: 10, left: 30, right: 15),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,14 +62,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 leadingIcon: Icons.light_mode_outlined,
                 title: appLocalizations.theme_text,
                 trailingText: 'Light Mode',
+                onTap: () {},
               ),
-              SettingItemTile(
-                leadingIcon: Icons.translate,
-                title: appLocalizations.language_text,
-                trailingText: 'English',
+              Consumer<LocaleProvider>(
+                builder: (context, localeProvider, child) => SettingItemTile(
+                  leadingIcon: Icons.translate,
+                  title: appLocalizations.language_text,
+                  trailingText: localeProvider.locale == 'en'
+                      ? appLocalizations.language_value_en
+                      : appLocalizations.language_value_de,
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return LanguageSelectionDialog(
+                          currentLocale: Locale(currentLocale.languageCode),
+                          onLanguageSelected: (locale) {
+                            localeProvider.setLocale(locale.languageCode);
+                          },
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
               ListTile(
-                contentPadding: const EdgeInsets.only(left: 0),
+                contentPadding: const EdgeInsets.only(left: 0, right: 7),
                 leading: const Icon(Icons.location_on_outlined),
                 title: Text(
                   appLocalizations.location_text,
@@ -111,10 +133,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SettingItemTile(
                 leadingIcon: Icons.person_4_outlined,
                 title: appLocalizations.account_information_text,
+                onTap: () {},
               ),
               SettingItemTile(
                 leadingIcon: Icons.verified_user_outlined,
                 title: appLocalizations.security_and_authentication,
+                onTap: () {},
               ),
               const SizedBox(
                 height: 10,
@@ -131,17 +155,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SettingItemTile(
                 leadingIcon: Icons.lock_outline,
                 title: appLocalizations.privacy_policy_text,
+                onTap: () {},
               ),
               SettingItemTile(
                 leadingIcon: Icons.description_outlined,
                 title: appLocalizations.terms_and_conditions_text,
+                onTap: () {},
               ),
               SettingItemTile(
                 leadingIcon: Icons.people_outline_outlined,
                 title: appLocalizations.about_us_text,
+                onTap: () {},
               ),
               ListTile(
-                contentPadding: const EdgeInsets.only(left: 0),
+                contentPadding: const EdgeInsets.only(left: 0, right: 7),
                 title: Text(
                   appLocalizations.app_version_text,
                   style: const TextStyle(
