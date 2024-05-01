@@ -42,6 +42,12 @@ class ThemeProvider extends ChangeNotifier {
     appBarTheme: const AppBarTheme(
       backgroundColor: Color.fromRGBO(237, 215, 191, 1),
     ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: Color.fromRGBO(255, 192, 157, 1), // Light mode color
+    ),
+    popupMenuTheme: const PopupMenuThemeData(
+      color: Color.fromRGBO(255, 245, 233, 1),
+    ),
     useMaterial3: true,
   );
 
