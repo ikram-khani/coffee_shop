@@ -26,7 +26,7 @@ class ProductListCard extends StatelessWidget {
         );
       },
       child: Card(
-        color: const Color.fromRGBO(255, 245, 233, 1),
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: Padding(
           padding: const EdgeInsets.all(5),
           child: Row(

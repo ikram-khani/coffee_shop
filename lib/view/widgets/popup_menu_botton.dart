@@ -17,7 +17,6 @@ class PopupMenuButtonWidget extends StatelessWidget {
       iconColor: Theme.of(context).primaryColor,
       padding: EdgeInsets.zero,
       position: PopupMenuPosition.under,
-      color: const Color.fromRGBO(255, 245, 233, 1),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),

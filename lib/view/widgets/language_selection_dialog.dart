@@ -1,3 +1,4 @@
+import 'package:coffee_shop/view/widgets/selection_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -31,43 +32,23 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations appLocalizations = AppLocalizations.of(context)!;
-    return AlertDialog(
-      title: Text(appLocalizations.select_text),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          RadioListTile<Language>(
-            title: Text(appLocalizations.language_value_en),
-            value: Language.english,
-            groupValue: selectedLanguage,
-            onChanged: (value) => setState(() => selectedLanguage = value!),
-          ),
-          RadioListTile<Language>(
-            title: Text(appLocalizations.language_value_de),
-            value: Language.german,
-            groupValue: selectedLanguage,
-            onChanged: (value) => setState(() => selectedLanguage = value!),
-          ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text('Cancel'), // Localized cancel button
-        ),
-        TextButton(
-          onPressed: () {
-            final newLocale = selectedLanguage == Language.english
-                ? const Locale('en')
-                : const Locale('de');
-            widget.onLanguageSelected(newLocale); // Pass selected locale
-            Navigator.pop(context);
-          },
-          child: Text(
-            "Select",
-          ), // Localized select button
-        ),
+    return SelectionDialog(
+      title: appLocalizations.language_alert_title,
+      //options[English, German]
+      options: [
+        appLocalizations.language_value_en,
+        appLocalizations.language_value_de
       ],
+      //if selected language from the current locale is english then English is current selection else German
+      currentSelection: selectedLanguage == Language.english
+          ? appLocalizations.language_value_en
+          : appLocalizations.language_value_de,
+      onSelectionChanged: (selectedOption) {
+        final newLocale = selectedOption == appLocalizations.language_value_en
+            ? const Locale('en')
+            : const Locale('de');
+        widget.onLanguageSelected(newLocale);
+      },
     );
   }
 }

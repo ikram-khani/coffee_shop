@@ -74,7 +74,7 @@ class _SearchScreenState extends State<SearchScreen> {
               children: [
                 Text(
                   '${_filteredProducts.length} ${appLocalizations.search_result_text}',
-                  style: TextStyle(color: Theme.of(context).primaryColor),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 const SizedBox(
                   height: 10,

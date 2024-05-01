@@ -1,6 +1,7 @@
 import 'package:coffee_shop/view/screens/main_screen.dart';
 import 'package:coffee_shop/view_models/location_data_provider.dart';
 import 'package:coffee_shop/view_models/locale_provider.dart';
+import 'package:coffee_shop/view_models/theme_provider.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_localizations/flutter_localizations.dart'; //for manually using delegate
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,6 +17,9 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => LocaleProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -30,8 +34,12 @@ class MyApp extends StatelessWidget {
     final localeDataProvider = Provider.of<LocaleProvider>(
       context,
     );
+    final themeProvider = Provider.of<ThemeProvider>(
+      context,
+    );
 
     return MaterialApp(
+      theme: themeProvider.currentTheme,
       locale: Locale(localeDataProvider.locale),
 
       //Manual delegate providing
@@ -52,14 +60,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.app_title,
       // title: 'Coffee Shop',
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromRGBO(237, 215, 191, 1),
-        primaryColor: const Color.fromRGBO(35, 12, 2, 1),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromRGBO(237, 215, 191, 1),
-        ),
-        useMaterial3: true,
-      ),
+
+      // ThemeData(
+      //   scaffoldBackgroundColor: const Color.fromRGBO(237, 215, 191, 1),
+      //   primaryColor: const Color.fromRGBO(35, 12, 2, 1),
+      //   appBarTheme: const AppBarTheme(
+      //     backgroundColor: Color.fromRGBO(237, 215, 191, 1),
+      //   ),
+      //   useMaterial3: true,
+      // ),
       home: const MainScreen(),
     );
   }

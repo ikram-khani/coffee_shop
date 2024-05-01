@@ -31,9 +31,6 @@ class StackFloatingButton extends StatelessWidget {
                 horizontal: 15,
               ),
             ),
-            backgroundColor: const MaterialStatePropertyAll(
-              Color.fromRGBO(255, 192, 157, 1),
-            ),
             foregroundColor:
                 MaterialStatePropertyAll(Theme.of(context).primaryColor),
           ),

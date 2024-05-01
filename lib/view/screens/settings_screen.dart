@@ -1,7 +1,9 @@
 import 'package:coffee_shop/view/widgets/language_selection_dialog.dart';
 import 'package:coffee_shop/view/widgets/setting_item_tile.dart';
+import 'package:coffee_shop/view/widgets/theme_selection_dialog.dart';
 import 'package:coffee_shop/view_models/locale_provider.dart';
 import 'package:coffee_shop/view_models/location_data_provider.dart';
+import 'package:coffee_shop/view_models/theme_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +19,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
+
     Provider.of<LocationDataProvider>(context, listen: false)
         .loadLocationEnabledState();
   }
@@ -28,7 +31,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     double appBarHeight = 70.0;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(appBarHeight),
         child: AppBar(
@@ -58,11 +60,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(
                 height: 5,
               ),
-              SettingItemTile(
-                leadingIcon: Icons.light_mode_outlined,
-                title: appLocalizations.theme_text,
-                trailingText: 'Light Mode',
-                onTap: () {},
+              Consumer<ThemeProvider>(
+                builder: (context, themeProvider, child) {
+                  return SettingItemTile(
+                    leadingIcon: Icons.light_mode_outlined,
+                    title: appLocalizations.theme_text,
+                    trailingText:
+                        themeProvider.currentThemeType == ThemeType.dark
+                            ? 'Dark'
+                            : 'Light',
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return ThemeSelectionDialog(
+                            currentTheme:
+                                themeProvider.currentThemeType == ThemeType.dark
+                                    ? ThemeType.dark
+                                    : ThemeType.light,
+                            onThemeSelection: (selectedTheme) {
+                              themeProvider.setTheme(selectedTheme);
+                            },
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
               ),
               Consumer<LocaleProvider>(
                 builder: (context, localeProvider, child) => SettingItemTile(

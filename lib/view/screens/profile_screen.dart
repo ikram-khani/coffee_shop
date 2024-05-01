@@ -72,9 +72,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   left: 25,
                   right: 25,
                 ),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).popupMenuTheme.color,
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.elliptical(15, 10),
                     topRight: Radius.elliptical(15, 10),
                   ),

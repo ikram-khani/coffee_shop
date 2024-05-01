@@ -21,7 +21,6 @@ class InfoTile extends StatelessWidget {
           valueText,
           style: const TextStyle(
             fontSize: 14,
-            color: Colors.grey,
           ),
         ),
       ],
