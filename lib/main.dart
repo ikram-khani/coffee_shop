@@ -2,12 +2,17 @@ import 'package:coffee_shop/view/screens/main_screen.dart';
 import 'package:coffee_shop/view_models/location_data_provider.dart';
 import 'package:coffee_shop/view_models/locale_provider.dart';
 import 'package:coffee_shop/view_models/theme_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_localizations/flutter_localizations.dart'; //for manually using delegate
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:coffee_shop/firebase_options.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(
       providers: [
