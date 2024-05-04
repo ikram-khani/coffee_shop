@@ -1,12 +1,9 @@
 import 'package:coffee_shop/view/widgets/cart_item_card.dart';
 import 'package:coffee_shop/view/widgets/stack_floating_button.dart';
-import 'package:coffee_shop/view_models/locale_provider.dart';
+import 'package:coffee_shop/view_models/cart_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../models/product_model.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -19,8 +16,10 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final appLocalization = AppLocalizations.of(context)!;
-    List<Product> productsList =
-        Provider.of<LocaleProvider>(context).getProducts();
+
+    final cartProvider = Provider.of<CartProvider>(
+      context,
+    );
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
@@ -47,15 +46,34 @@ class _CartScreenState extends State<CartScreen> {
       body: Stack(
         children: [
           ListView.builder(
-            itemCount: productsList.length,
+            itemCount: cartProvider.itemCount,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: CartItemCard(index: index),
+                child: CartItemCard(
+                  title: cartProvider.items.values.toList()[index].title,
+                  price: cartProvider.items.values
+                      .toList()[index]
+                      .price
+                      .toString(),
+                  quantity: cartProvider.items.values
+                      .toList()[index]
+                      .quantity
+                      .toString(),
+                  category: cartProvider.items.values.toList()[index].category,
+                  picUrl: cartProvider.items.values.toList()[index].picUrl,
+                  onAddQuantity: () => cartProvider.incrementItemQuantity(
+                    cartProvider.items.keys.toList()[index],
+                  ),
+                  onSubQuantity: () => cartProvider.decrementItemQuantity(
+                    cartProvider.items.keys.toList()[index],
+                  ),
+                ),
               );
             },
           ),
           StackFloatingButton(
+            totalAmount: cartProvider.totalAmount.toStringAsFixed(2),
             appLocalizations: appLocalization,
             onPressed: () => print('checkout successful'),
           ),

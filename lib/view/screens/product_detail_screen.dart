@@ -2,6 +2,7 @@ import 'package:coffee_shop/models/product_model.dart';
 import 'package:coffee_shop/view/widgets/app_bar_widget.dart';
 import 'package:coffee_shop/view/widgets/cached_network_mage.dart';
 import 'package:coffee_shop/view/widgets/size_toggle_buttons.dart';
+import 'package:coffee_shop/view_models/cart_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,23 +18,7 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  int _quantity = 1;
-
   double _increasingFactor = 1;
-
-  void _increment() {
-    setState(() {
-      _quantity++;
-    });
-  }
-
-  void _decrement() {
-    if (_quantity > 1) {
-      setState(() {
-        _quantity--;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +30,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     Product product =
         productsList.firstWhere((element) => element.id == widget.productId);
     double netProductPrice = product.price * _increasingFactor;
+
+    final cartProvider = Provider.of<CartProvider>(context);
 
     final deviceSize = MediaQuery.of(context).size;
 
@@ -223,7 +210,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               IconButton(
-                                onPressed: _decrement,
+                                onPressed: () =>
+                                    cartProvider.subProductQuantity(),
                                 icon: Icon(
                                   Icons.remove,
                                   color:
@@ -232,14 +220,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 ),
                               ),
                               Text(
-                                _quantity.toString(),
+                                cartProvider.quantity.toString(),
                                 style: TextStyle(
                                   color:
                                       Theme.of(context).scaffoldBackgroundColor,
                                 ),
                               ),
                               IconButton(
-                                onPressed: _increment,
+                                onPressed: () =>
+                                    cartProvider.addProductQuantity(),
                                 icon: Icon(
                                   Icons.add,
                                   color:
@@ -269,7 +258,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               ),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            cartProvider.addItem(
+                              product.id.toString(),
+                              product.name,
+                              netProductPrice,
+                              product.pictureUrl,
+                              product.category,
+                            );
+                          },
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(

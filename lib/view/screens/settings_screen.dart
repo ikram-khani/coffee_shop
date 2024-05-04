@@ -1,6 +1,7 @@
 import 'package:coffee_shop/view/widgets/language_selection_dialog.dart';
 import 'package:coffee_shop/view/widgets/setting_item_tile.dart';
 import 'package:coffee_shop/view/widgets/theme_selection_dialog.dart';
+import 'package:coffee_shop/view_models/cart_provider.dart';
 import 'package:coffee_shop/view_models/locale_provider.dart';
 import 'package:coffee_shop/view_models/location_data_provider.dart';
 import 'package:coffee_shop/view_models/theme_provider.dart';
@@ -103,6 +104,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           currentLocale: Locale(currentLocale.languageCode),
                           onLanguageSelected: (locale) {
                             localeProvider.setLocale(locale.languageCode);
+
+                            //for updating carItems according to specific locale
+                            Provider.of<CartProvider>(context, listen: false)
+                                .updateCartItemsAccordingTOLocale(
+                              localeProvider.getProducts(),
+                            );
                           },
                         );
                       },

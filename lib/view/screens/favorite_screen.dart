@@ -38,7 +38,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: CartItemCard(
-              index: index,
+              category: productsList[index].category,
+              title: productsList[index].name,
+              price: productsList[index].price.toString(),
+              picUrl: productsList[index].pictureUrl,
+              productId: productsList[index].id,
               isThisFavoriteScreen: true,
             ),
           );

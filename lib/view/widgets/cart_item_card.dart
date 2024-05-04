@@ -1,35 +1,42 @@
 import 'package:coffee_shop/view/widgets/cached_network_mage.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../models/product_model.dart';
-import '../../view_models/locale_provider.dart';
 import '../screens/product_detail_screen.dart';
 
-class CartItemCard extends StatefulWidget {
+class CartItemCard extends StatelessWidget {
   final bool isThisFavoriteScreen;
-  final int index;
-  const CartItemCard(
-      {this.isThisFavoriteScreen = false, required this.index, super.key});
 
-  @override
-  State<CartItemCard> createState() => _CartItemCardState();
-}
+  final int? productId;
+  final String title;
+  final String category;
+  final String price;
+  final String picUrl;
+  final String? quantity;
+  final Function()? onAddQuantity;
+  final Function()? onSubQuantity;
+  const CartItemCard({
+    this.isThisFavoriteScreen = false,
+    super.key,
+    this.productId,
+    required this.title,
+    required this.category,
+    required this.price,
+    required this.picUrl,
+    this.quantity,
+    this.onAddQuantity,
+    this.onSubQuantity,
+  });
 
-class _CartItemCardState extends State<CartItemCard> {
   @override
   Widget build(BuildContext context) {
-    List<Product> productsList =
-        Provider.of<LocaleProvider>(context).getProducts();
     final deviceSize = MediaQuery.of(context).size;
-    final products = productsList;
+
     return InkWell(
-      onTap: widget.isThisFavoriteScreen
+      onTap: isThisFavoriteScreen
           ? () {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => ProductDetailScreen(
-                    productId: products[widget.index].id,
+                    productId: productId!,
                   ),
                 ),
               );
@@ -58,7 +65,7 @@ class _CartItemCardState extends State<CartItemCard> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(80),
                     child: CachedNetworkImageWidget(
-                      imageUrl: products[widget.index].pictureUrl,
+                      imageUrl: picUrl,
                     ),
                   ),
                 ),
@@ -72,11 +79,11 @@ class _CartItemCardState extends State<CartItemCard> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        products[widget.index].category,
+                        category,
                         style: const TextStyle(fontSize: 10),
                       ),
                       Text(
-                        products[widget.index].name,
+                        title,
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.bold,
@@ -87,7 +94,7 @@ class _CartItemCardState extends State<CartItemCard> {
                         height: 5,
                       ),
                       Text(
-                        '\$${products[widget.index].price.toString()}',
+                        '\$$price',
                         style: TextStyle(
                           color:
                               Theme.of(context).primaryColor.withOpacity(0.5),
@@ -99,7 +106,7 @@ class _CartItemCardState extends State<CartItemCard> {
                   ),
                 ),
                 const Spacer(),
-                widget.isThisFavoriteScreen
+                isThisFavoriteScreen
                     ? Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Icon(
@@ -118,7 +125,7 @@ class _CartItemCardState extends State<CartItemCard> {
                             height: 30,
                             width: 30,
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: onAddQuantity,
                               icon: Icon(
                                 Icons.add,
                                 color: Theme.of(context).primaryColor,
@@ -126,15 +133,15 @@ class _CartItemCardState extends State<CartItemCard> {
                               ),
                             ),
                           ),
-                          const Text(
-                            '1',
-                            style: TextStyle(fontWeight: FontWeight.w500),
+                          Text(
+                            quantity.toString(),
+                            style: const TextStyle(fontWeight: FontWeight.w500),
                           ),
                           Ink(
                             width: 30,
                             height: 30,
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: onSubQuantity,
                               icon: Icon(
                                 Icons.remove,
                                 color: Theme.of(context).primaryColor,

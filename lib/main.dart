@@ -1,4 +1,5 @@
 import 'package:coffee_shop/view/screens/main_screen.dart';
+import 'package:coffee_shop/view_models/cart_provider.dart';
 import 'package:coffee_shop/view_models/location_data_provider.dart';
 import 'package:coffee_shop/view_models/locale_provider.dart';
 import 'package:coffee_shop/view_models/theme_provider.dart';
@@ -10,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:coffee_shop/firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -24,6 +26,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
         ),
       ],
       child: const MyApp(),

@@ -4,8 +4,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class StackFloatingButton extends StatelessWidget {
   final Function() onPressed;
   final AppLocalizations appLocalizations;
+  final String totalAmount;
 
   const StackFloatingButton({
+    required this.totalAmount,
     required this.onPressed,
     super.key,
     required this.appLocalizations,
@@ -50,7 +52,7 @@ class StackFloatingButton extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '\$487',
+                    '\$$totalAmount',
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
                     ),
