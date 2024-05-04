@@ -55,7 +55,7 @@ class _CartScreenState extends State<CartScreen> {
                   price: cartProvider.items.values
                       .toList()[index]
                       .price
-                      .toString(),
+                      .toStringAsFixed(2),
                   quantity: cartProvider.items.values
                       .toList()[index]
                       .quantity

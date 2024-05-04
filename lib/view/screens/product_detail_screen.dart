@@ -266,6 +266,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               product.pictureUrl,
                               product.category,
                             );
+                            ScaffoldMessenger.of(context).clearSnackBars();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'The product added to the cart successfully',
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                                backgroundColor:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                              ),
+                            );
                           },
                           child: FittedBox(
                             fit: BoxFit.scaleDown,

@@ -48,7 +48,7 @@ class CartProvider with ChangeNotifier {
           (existingItem) => CartItem(
                 id: existingItem.id,
                 title: existingItem.title,
-                quantity: existingItem.quantity < 4
+                quantity: existingItem.quantity + quantity <= 4
                     ? existingItem.quantity + quantity
                     : existingItem.quantity,
                 price: existingItem.price,

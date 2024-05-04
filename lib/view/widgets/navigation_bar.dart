@@ -1,5 +1,7 @@
+import 'package:coffee_shop/view_models/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   final void Function(int) onItemSelection;
@@ -54,11 +56,17 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
               label: appLocalization!.bottom_navbar_item1,
             ),
             NavigationDestination(
-              icon: Badge(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                backgroundColor: Theme.of(context).primaryColor,
-                label: const Text('1'),
-                child: const Icon(Icons.shopping_cart_outlined),
+              icon: Consumer<CartProvider>(
+                builder: (context, cartProvider, child) => Badge(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  label: cartProvider.itemCount == 0
+                      ? null
+                      : Text(
+                          cartProvider.itemCount.toString(),
+                        ),
+                  child: const Icon(Icons.shopping_cart_outlined),
+                ),
               ),
               selectedIcon: const Icon(Icons.shopping_cart),
               label: appLocalization.bottom_navbar_item2,
