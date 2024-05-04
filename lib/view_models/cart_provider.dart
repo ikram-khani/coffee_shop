@@ -48,7 +48,7 @@ class CartProvider with ChangeNotifier {
           (existingItem) => CartItem(
                 id: existingItem.id,
                 title: existingItem.title,
-                quantity: existingItem.quantity + quantity <= 4
+                quantity: existingItem.quantity + quantity <= 10
                     ? existingItem.quantity + quantity
                     : existingItem.quantity,
                 price: existingItem.price,
@@ -102,7 +102,7 @@ class CartProvider with ChangeNotifier {
 
   var quantity = 1;
   void addProductQuantity() {
-    if (quantity >= 4) {
+    if (quantity >= 10) {
       return;
     }
     quantity += 1;
@@ -124,9 +124,9 @@ class CartProvider with ChangeNotifier {
   void incrementItemQuantity(String productId) {
     CartItem? existingItem = _items[productId];
 
-    // Check if the quantity is already 4
-    if (existingItem!.quantity == 4) {
-      // If the quantity is already 4, don't increment further
+    // Check if the quantity is already 10
+    if (existingItem!.quantity == 10) {
+      // If the quantity is already 10, don't increment further
 
       return;
     }
